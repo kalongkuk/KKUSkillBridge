@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Courses — KKU SkillBridge</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Sarabun:wght@400;600;700;800;900&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+
+<nav class="navbar">
+  <a href="index.html" class="navbar-brand">
+    <div class="logo-icon">🌿</div>
+    KKU <span class="accent">Skill</span>Bridge
+  </a>
+  <div class="hamburger"><span></span><span></span><span></span></div>
+  <ul class="nav-links">
+    <li><a href="index.html">Home</a></li>
+    <li><a href="courses.html" class="active">Courses</a></li>
+    <li><a href="chatbot.html">AI Chatbot</a></li>
+    <li><a href="others.html">Others</a></li>
+  </ul>
+  <div class="nav-right">
+    <div style="position:relative">
+      <button class="btn-profile" id="profileBtn">👤</button>
+      <div class="dropdown-menu" id="dropdownMenu">
+        <a href="profile.html">👤 &nbsp;ข้อมูลบัญชี</a>
+        <a href="profile.html#courses">📚 &nbsp;คอร์สของฉัน</a>
+        <a href="profile.html#analysis">📊 &nbsp;AI Analysis</a>
+        <div class="divider"></div>
+        <a href="others.html">❓ &nbsp;Help Center</a>
+      </div>
+    </div>
+  </div>
+</nav>
+
+<div class="page-hero">
+  <h1>📚 คอร์ส Soft Skills</h1>
+  <p>เรียนฟรีทุกคอร์ส ออกแบบเฉพาะสำหรับนักศึกษาและบุคลากรสายสุขภาพ</p>
+</div>
+
+<div class="filters-bar">
+  <button class="filter-chip active" data-filter="all">ทั้งหมด</button>
+  <button class="filter-chip" data-filter="communication">💬 Communication</button>
+  <button class="filter-chip" data-filter="teamwork">🤝 Teamwork</button>
+  <button class="filter-chip" data-filter="leadership">👑 Leadership</button>
+  <button class="filter-chip" data-filter="empathy">💙 Empathy</button>
+  <button class="filter-chip" data-filter="critical">🧠 Critical Thinking</button>
+  <button class="filter-chip" data-filter="stress">🧘 Stress Management</button>
+  <div class="search-bar">
+    <span>🔍</span>
+    <input type="text" placeholder="ค้นหาคอร์ส..." />
+  </div>
+</div>
+
+<section class="section">
+  <div class="section-header" style="margin-bottom:1.5rem">
+    <div>
+      <div class="section-title" style="font-size:1.2rem">Communication Skills</div>
+    </div>
+  </div>
+  <div class="courses-grid">
+
+    <div class="course-card" data-category="communication">
+      <div class="course-thumb">💬</div>
+      <div class="course-body">
+        <span class="course-tag">Communication</span>
+        <h3>การสื่อสารกับผู้ป่วยและครอบครัว</h3>
+        <p>เรียนรู้เทคนิคการสื่อสารที่มีประสิทธิภาพ เข้าใจง่าย ลดความเข้าใจผิด</p>
+        <div class="course-meta">
+          <span>⏱ 4 ชม.</span>
+          <span>👩‍⚕️ ผศ.ดร.สมใจ</span>
+          <span class="badge-free">ฟรี</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="course-card" data-category="communication">
+      <div class="course-thumb">👂</div>
+      <div class="course-body">
+        <span class="course-tag">Communication</span>
+        <h3>Active Listening — การฟังเชิงรุก</h3>
+        <p>ฝึกทักษะการฟังอย่างตั้งใจ เพื่อเข้าใจความต้องการที่แท้จริงของผู้ป่วย</p>
+        <div class="course-meta">
+          <span>⏱ 2 ชม.</span>
+          <span>👨‍⚕️ อ.ดร.ประภัส</span>
+          <span class="badge-free">ฟรี</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="course-card" data-category="communication">
+      <div class="course-thumb blue">📋</div>
+      <div class="course-body">
+        <span class="course-tag blue">Communication</span>
+        <h3>การเขียนและรายงานทางคลินิก</h3>
+        <p>เขียนรายงานและบันทึกทางคลินิกอย่างมืออาชีพ ชัดเจน ครบถ้วน</p>
+        <div class="course-meta">
+          <span>⏱ 3 ชม.</span>
+          <span>👩‍⚕️ รศ.ดร.นันทิยา</span>
+          <span class="badge-free">ฟรี</span>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<section class="section section-alt">
+  <div class="section-header" style="margin-bottom:1.5rem">
+    <div><div class="section-title" style="font-size:1.2rem">Teamwork & Collaboration</div></div>
+  </div>
+  <div class="courses-grid">
+
+    <div class="course-card" data-category="teamwork">
+      <div class="course-thumb blue">🤝</div>
+      <div class="course-body">
+        <span class="course-tag blue">Teamwork</span>
+        <h3>การทำงานเป็นทีมสหวิชาชีพ</h3>
+        <p>ประสานงานกับทีมแพทย์, พยาบาล, นักกายภาพ และสหวิชาชีพอื่นๆ</p>
+        <div class="course-meta">
+          <span>⏱ 3 ชม.</span>
+          <span>👨‍⚕️ รศ.ดร.วิชัย</span>
+          <span class="badge-free">ฟรี</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="course-card" data-category="teamwork">
+      <div class="course-thumb blue">⚡</div>
+      <div class="course-body">
+        <span class="course-tag blue">Teamwork</span>
+        <h3>การจัดการความขัดแย้งในทีม</h3>
+        <p>เรียนรู้วิธีแก้ไขความขัดแย้งอย่างสร้างสรรค์ รักษาความสัมพันธ์ในทีม</p>
+        <div class="course-meta">
+          <span>⏱ 2.5 ชม.</span>
+          <span>👩‍⚕️ ผศ.ดร.ชนิดา</span>
+          <span class="badge-free">ฟรี</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="course-card" data-category="teamwork">
+      <div class="course-thumb">🔄</div>
+      <div class="course-body">
+        <span class="course-tag">Teamwork</span>
+        <h3>Handover Communication ในสายสุขภาพ</h3>
+        <p>ส่งมอบงานและข้อมูลผู้ป่วยระหว่างกะอย่างปลอดภัยและมีประสิทธิภาพ</p>
+        <div class="course-meta">
+          <span>⏱ 2 ชม.</span>
+          <span>👨‍⚕️ อ.สุภาพ</span>
+          <span class="badge-free">ฟรี</span>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<section class="section">
+  <div class="section-header" style="margin-bottom:1.5rem">
+    <div><div class="section-title" style="font-size:1.2rem">Leadership & Critical Thinking</div></div>
+  </div>
+  <div class="courses-grid">
+
+    <div class="course-card" data-category="leadership">
+      <div class="course-thumb orange">👑</div>
+      <div class="course-body">
+        <span class="course-tag orange">Leadership</span>
+        <h3>ภาวะผู้นำสำหรับบุคลากรสายสุขภาพ</h3>
+        <p>พัฒนาทักษะผู้นำ การตัดสินใจ และการบริหารทีมในสถานการณ์กดดัน</p>
+        <div class="course-meta">
+          <span>⏱ 6 ชม.</span>
+          <span>👩‍⚕️ รศ.ดร.กมลรัตน์</span>
+          <span class="badge-free">ฟรี</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="course-card" data-category="critical">
+      <div class="course-thumb orange">🧠</div>
+      <div class="course-body">
+        <span class="course-tag orange">Critical Thinking</span>
+        <h3>การคิดเชิงวิเคราะห์ในสายสุขภาพ</h3>
+        <p>ฝึกการคิดอย่างเป็นระบบ วิเคราะห์ข้อมูลและตัดสินใจทางคลินิก</p>
+        <div class="course-meta">
+          <span>⏱ 5 ชม.</span>
+          <span>👩‍⚕️ ผศ.ดร.อรุณ</span>
+          <span class="badge-free">ฟรี</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="course-card" data-category="critical">
+      <div class="course-thumb">🔬</div>
+      <div class="course-body">
+        <span class="course-tag">Critical Thinking</span>
+        <h3>Evidence-Based Practice สำหรับนักศึกษา</h3>
+        <p>เรียนรู้การนำหลักฐานทางวิทยาศาสตร์มาประยุกต์ใช้ในการตัดสินใจ</p>
+        <div class="course-meta">
+          <span>⏱ 4 ชม.</span>
+          <span>👨‍⚕️ รศ.ดร.ธนวัฒน์</span>
+          <span class="badge-free">ฟรี</span>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<section class="section section-alt">
+  <div class="section-header" style="margin-bottom:1.5rem">
+    <div><div class="section-title" style="font-size:1.2rem">Empathy & Stress Management</div></div>
+  </div>
+  <div class="courses-grid">
+
+    <div class="course-card" data-category="empathy">
+      <div class="course-thumb">💙</div>
+      <div class="course-body">
+        <span class="course-tag">Empathy</span>
+        <h3>Empathy in Healthcare — ความเห็นอกเห็นใจทางการแพทย์</h3>
+        <p>เข้าใจและรับรู้ความรู้สึกผู้ป่วย เพื่อการดูแลที่ครบมิติ</p>
+        <div class="course-meta">
+          <span>⏱ 3 ชม.</span>
+          <span>👩‍⚕️ ผศ.ดร.มณีรัตน์</span>
+          <span class="badge-free">ฟรี</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="course-card" data-category="empathy">
+      <div class="course-thumb blue">🌸</div>
+      <div class="course-body">
+        <span class="course-tag blue">Empathy</span>
+        <h3>Cultural Competency ในการดูแลผู้ป่วย</h3>
+        <p>เรียนรู้การเคารพความหลากหลายทางวัฒนธรรมในการให้บริการสุขภาพ</p>
+        <div class="course-meta">
+          <span>⏱ 3.5 ชม.</span>
+          <span>👨‍⚕️ อ.ดร.พรชัย</span>
+          <span class="badge-free">ฟรี</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="course-card" data-category="stress">
+      <div class="course-thumb orange">🧘</div>
+      <div class="course-body">
+        <span class="course-tag orange">Stress Management</span>
+        <h3>Mindfulness สำหรับบุคลากรการแพทย์</h3>
+        <p>เทคนิค Mindfulness เพื่อลดความเครียด ป้องกัน Burnout ในสายสุขภาพ</p>
+        <div class="course-meta">
+          <span>⏱ 2 ชม.</span>
+          <span>👩‍⚕️ อ.สายใจ</span>
+          <span class="badge-free">ฟรี</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="course-card" data-category="stress">
+      <div class="course-thumb">💪</div>
+      <div class="course-body">
+        <span class="course-tag">Stress Management</span>
+        <h3>Resilience — สร้างความยืดหยุ่นทางจิตใจ</h3>
+        <p>ฝึกความสามารถในการฟื้นฟูตัวเองหลังจากเผชิญกับเหตุการณ์ยากลำบาก</p>
+        <div class="course-meta">
+          <span>⏱ 3 ชม.</span>
+          <span>👨‍⚕️ รศ.ดร.กิตติ</span>
+          <span class="badge-free">ฟรี</span>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<footer>
+  <div class="footer-grid">
+    <div class="footer-brand">
+      <h2>🌿 KKU SkillBridge</h2>
+      <p>แพลตฟอร์มพัฒนา Soft Skills สำหรับนักศึกษาสายสุขภาพ<br/>คณะวิทยาศาสตร์สุขภาพ มหาวิทยาลัยขอนแก่น</p>
+    </div>
+    <div class="footer-col"><h4>เมนูหลัก</h4><a href="index.html">Home</a><a href="courses.html">Courses</a><a href="chatbot.html">AI Chatbot</a><a href="others.html">Others</a></div>
+    <div class="footer-col"><h4>Soft Skills</h4><a href="#">Communication</a><a href="#">Teamwork</a><a href="#">Leadership</a><a href="#">Empathy</a></div>
+    <div class="footer-col"><h4>ช่วยเหลือ</h4><a href="others.html">Help Center</a><a href="profile.html">โปรไฟล์</a></div>
+  </div>
+  <div class="footer-bottom">© 2569 KKU SkillBridge — คณะวิทยาศาสตร์สุขภาพ มหาวิทยาลัยขอนแก่น</div>
+</footer>
+
+<script src="js/main.js"></script>
+</body>
+</html>

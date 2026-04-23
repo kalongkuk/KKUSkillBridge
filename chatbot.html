@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AI Chatbot — KKU SkillBridge</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Sarabun:wght@400;600;700;800;900&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+
+<nav class="navbar">
+  <a href="index.html" class="navbar-brand">
+    <div class="logo-icon">🌿</div>
+    KKU <span class="accent">Skill</span>Bridge
+  </a>
+  <div class="hamburger"><span></span><span></span><span></span></div>
+  <ul class="nav-links">
+    <li><a href="index.html">Home</a></li>
+    <li><a href="courses.html">Courses</a></li>
+    <li><a href="chatbot.html" class="active">AI Chatbot</a></li>
+    <li><a href="others.html">Others</a></li>
+  </ul>
+  <div class="nav-right">
+    <div style="position:relative">
+      <button class="btn-profile" id="profileBtn">👤</button>
+      <div class="dropdown-menu" id="dropdownMenu">
+        <a href="profile.html">👤 &nbsp;ข้อมูลบัญชี</a>
+        <a href="profile.html#courses">📚 &nbsp;คอร์สของฉัน</a>
+        <a href="profile.html#analysis">📊 &nbsp;AI Analysis</a>
+        <div class="divider"></div>
+        <a href="others.html">❓ &nbsp;Help Center</a>
+      </div>
+    </div>
+  </div>
+</nav>
+
+<div class="chatbot-layout">
+
+  <!-- Sidebar -->
+  <aside class="chat-sidebar">
+    <h3>โหมดการเรียนรู้</h3>
+
+    <button class="mode-btn active" id="mode-qa" onclick="setMode('qa')">
+      <span class="mode-icon">💬</span>
+      <div>
+        <div style="font-size:0.9rem">ถาม-ตอบ Q&amp;A</div>
+        <div style="font-size:0.78rem;color:var(--grey-text);font-weight:400">สอบถามเรื่อง Soft Skills</div>
+      </div>
+    </button>
+
+    <button class="mode-btn" id="mode-roleplay" onclick="setMode('roleplay')">
+      <span class="mode-icon">🎭</span>
+      <div>
+        <div style="font-size:0.9rem">Role Play</div>
+        <div style="font-size:0.78rem;color:var(--grey-text);font-weight:400">ฝึกสถานการณ์จริง</div>
+      </div>
+    </button>
+
+    <button class="mode-btn" id="mode-reflection" onclick="setMode('reflection')">
+      <span class="mode-icon">🪞</span>
+      <div>
+        <div style="font-size:0.9rem">Reflection</div>
+        <div style="font-size:0.78rem;color:var(--grey-text);font-weight:400">ทบทวนหลังเรียน</div>
+      </div>
+    </button>
+
+    <button class="mode-btn" id="mode-analysis" onclick="setMode('analysis')">
+      <span class="mode-icon">📊</span>
+      <div>
+        <div style="font-size:0.9rem">วิเคราะห์ทักษะ</div>
+        <div style="font-size:0.78rem;color:var(--grey-text);font-weight:400">AI วิเคราะห์ส่วนตัว</div>
+      </div>
+    </button>
+
+    <div style="margin-top:auto;padding-top:1rem;border-top:1px solid #e5ede9">
+      <p style="font-size:0.8rem;color:var(--grey-text);margin-bottom:0.75rem">ทักษะที่กำลังพัฒนา</p>
+      <div style="display:flex;flex-direction:column;gap:0.5rem">
+        <div>
+          <div style="display:flex;justify-content:space-between;font-size:0.78rem;margin-bottom:0.2rem"><span>Communication</span><span>72%</span></div>
+          <div style="height:5px;background:#e5ede9;border-radius:10px;overflow:hidden"><div style="height:100%;width:72%;background:var(--green);border-radius:10px"></div></div>
+        </div>
+        <div>
+          <div style="display:flex;justify-content:space-between;font-size:0.78rem;margin-bottom:0.2rem"><span>Empathy</span><span>58%</span></div>
+          <div style="height:5px;background:#e5ede9;border-radius:10px;overflow:hidden"><div style="height:100%;width:58%;background:var(--blue);border-radius:10px"></div></div>
+        </div>
+        <div>
+          <div style="display:flex;justify-content:space-between;font-size:0.78rem;margin-bottom:0.2rem"><span>Teamwork</span><span>65%</span></div>
+          <div style="height:5px;background:#e5ede9;border-radius:10px;overflow:hidden"><div style="height:100%;width:65%;background:var(--orange);border-radius:10px"></div></div>
+        </div>
+      </div>
+    </div>
+  </aside>
+
+  <!-- Chat Main -->
+  <div class="chat-main">
+    <div class="chat-header">
+      <div class="avatar">🤖</div>
+      <div class="chat-header-info">
+        <h3>SkillBot — AI ผู้ช่วยพัฒนาทักษะ</h3>
+        <p>KKU SkillBridge AI • พัฒนาโดยคณะวิทยาศาสตร์สุขภาพ</p>
+      </div>
+      <div class="chat-status">
+        <div class="dot"></div>
+        ออนไลน์
+      </div>
+    </div>
+
+    <div class="chat-messages" id="chatMessages"></div>
+
+    <div class="chat-input-area">
+      <div class="quick-prompts" id="quickPrompts">
+        <button class="quick-prompt" onclick="quickSend('Empathy คืออะไร')">Empathy คืออะไร?</button>
+        <button class="quick-prompt" onclick="quickSend('วิธีพัฒนาการสื่อสาร')">พัฒนาการสื่อสาร</button>
+        <button class="quick-prompt" onclick="quickSend('จัดการความเครียด')">จัดการ Stress</button>
+        <button class="quick-prompt" onclick="quickSend('แนะนำคอร์สเรียน')">แนะนำคอร์ส</button>
+      </div>
+      <div class="input-row">
+        <textarea
+          class="chat-input"
+          id="chatInput"
+          placeholder="พิมพ์คำถามหรือข้อความ... (Enter เพื่อส่ง, Shift+Enter ขึ้นบรรทัดใหม่)"
+          rows="1"
+        ></textarea>
+        <button class="send-btn" onclick="sendMessage()">➤</button>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<script src="js/main.js"></script>
+<script src="js/chatbot.js"></script>
+</body>
+</html>

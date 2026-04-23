@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>KKU SkillBridge — พัฒนา Soft Skills สายสุขภาพ</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Sarabun:wght@400;600;700;800;900&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+
+<!-- ===== NAVBAR ===== -->
+<nav class="navbar">
+  <a href="index.html" class="navbar-brand">
+    <div class="logo-icon">🌿</div>
+    KKU <span class="accent">Skill</span>Bridge
+  </a>
+  <div class="hamburger" aria-label="เมนู"><span></span><span></span><span></span></div>
+  <ul class="nav-links">
+    <li><a href="index.html" class="active">Home</a></li>
+    <li><a href="courses.html">Courses</a></li>
+    <li><a href="chatbot.html">AI Chatbot</a></li>
+    <li><a href="others.html">Others</a></li>
+  </ul>
+  <div class="nav-right">
+    <div style="position:relative">
+      <button class="btn-profile" id="profileBtn" aria-label="โปรไฟล์">👤</button>
+      <div class="dropdown-menu" id="dropdownMenu">
+        <a href="profile.html">👤 &nbsp;ข้อมูลบัญชี</a>
+        <a href="profile.html#courses">📚 &nbsp;คอร์สของฉัน</a>
+        <a href="profile.html#analysis">📊 &nbsp;AI Analysis</a>
+        <a href="#" onclick="openQuiz()">🎯 &nbsp;ทดสอบทักษะ</a>
+        <div class="divider"></div>
+        <a href="others.html#help">❓ &nbsp;Help Center</a>
+      </div>
+    </div>
+  </div>
+</nav>
+
+<!-- ===== HERO ===== -->
+<section class="hero">
+  <div class="hero-bg-pattern"></div>
+  <div class="hero-content">
+    <div class="hero-badge">🏥 คณะวิทยาศาสตร์สุขภาพ มหาวิทยาลัยขอนแก่น</div>
+    <h1>พัฒนา <span>Soft Skills</span><br/>เพื่ออาชีพ<br/>สายสุขภาพที่ยอดเยี่ยม</h1>
+    <p>แพลตฟอร์มเรียนรู้ที่รวม AI, คอร์สออนไลน์ และกิจกรรม เพื่อช่วยนักศึกษาสายสุขภาพพัฒนาทักษะที่จำเป็นในการทำงานจริง</p>
+    <div class="hero-actions">
+      <a href="courses.html" class="btn btn-primary">🚀 เริ่มเรียนเลย</a>
+      <button class="btn btn-outline" onclick="openQuiz()">🎯 ทดสอบทักษะของคุณ</button>
+    </div>
+    <div class="hero-stats">
+      <div class="stat"><div class="stat-num">50+</div><div class="stat-label">คอร์สฟรี</div></div>
+      <div class="stat"><div class="stat-num">8</div><div class="stat-label">Soft Skills หลัก</div></div>
+      <div class="stat"><div class="stat-num">AI</div><div class="stat-label">Chatbot ส่วนตัว</div></div>
+      <div class="stat"><div class="stat-num">24/7</div><div class="stat-label">เรียนได้ทุกเวลา</div></div>
+    </div>
+  </div>
+  <div class="hero-illustration"><div class="illus-inner">🩺</div></div>
+</section>
+
+<!-- ===== SKILL TEST BANNER ===== -->
+<div class="skill-test-banner" onclick="openQuiz()">
+  <div class="icon">🎯</div>
+  <div>
+    <h3>ทดสอบระดับ Soft Skills ของคุณ</h3>
+    <p>แบบทดสอบ 5 ข้อ ใช้เวลา ~3 นาที รับผลวิเคราะห์ทักษะพร้อมคอร์สแนะนำทันที</p>
+  </div>
+  <div class="arrow">→</div>
+</div>
+
+<!-- ===== HOW IT WORKS ===== -->
+<section class="section section-alt">
+  <div class="section-title">แพลตฟอร์มของเราช่วยคุณได้อย่างไร</div>
+  <p class="section-sub">ครบครัน ตั้งแต่การวัดทักษะ จนถึงการฝึกฝนและติดตามผล</p>
+  <div class="features-grid">
+    <div class="feature-card">
+      <div class="feature-icon">📚</div>
+      <h3>คอร์สเรียน Soft Skills</h3>
+      <p>คอร์สหลากหลายแบ่งตามประเภทของ Soft Skills พร้อมสื่อการสอนที่หลากหลาย เรียนฟรี ไม่มีค่าใช้จ่าย</p>
+    </div>
+    <div class="feature-card">
+      <div class="feature-icon blue">🤖</div>
+      <h3>AI Chatbot ส่วนตัว</h3>
+      <p>ฝึกทักษะกับ AI ผ่านการถาม-ตอบ, Role Play สถานการณ์จริง และ Reflection หลังเรียน</p>
+    </div>
+    <div class="feature-card">
+      <div class="feature-icon orange">🎯</div>
+      <h3>วัดและติดตามทักษะ</h3>
+      <p>แบบทดสอบที่ออกแบบมาสำหรับบุคลากรสายสุขภาพ พร้อมกราฟแสดงพัฒนาการ</p>
+    </div>
+    <div class="feature-card">
+      <div class="feature-icon">📅</div>
+      <h3>กิจกรรมและสัมมนา</h3>
+      <p>รวมกิจกรรม, Workshop และสัมมนาจากคณะ ช่วยให้คุณวางแผนการพัฒนาตนเองได้ง่าย</p>
+    </div>
+  </div>
+</section>
+
+<!-- ===== FEATURED COURSES ===== -->
+<section class="section">
+  <div class="section-header">
+    <div>
+      <div class="section-title">คอร์สยอดนิยม</div>
+      <p class="section-sub" style="margin-bottom:0">เรียนฟรี ไม่มีค่าใช้จ่าย</p>
+    </div>
+    <a href="courses.html" class="link-all">ดูทั้งหมด →</a>
+  </div>
+  <div class="courses-grid">
+    <div class="course-card">
+      <div class="course-thumb">💬</div>
+      <div class="course-body">
+        <span class="course-tag">Communication</span>
+        <h3>การสื่อสารกับผู้ป่วยและครอบครัว</h3>
+        <p>เรียนรู้เทคนิคการสื่อสารที่มีประสิทธิภาพกับผู้ป่วยในทุกสถานการณ์</p>
+        <div class="course-meta">
+          <span>⏱ 4 ชั่วโมง</span>
+          <span>👩‍⚕️ ผศ.ดร.สมใจ</span>
+          <span class="badge-free">ฟรี</span>
+        </div>
+      </div>
+    </div>
+    <div class="course-card">
+      <div class="course-thumb blue">🤝</div>
+      <div class="course-body">
+        <span class="course-tag blue">Teamwork</span>
+        <h3>การทำงานเป็นทีมสหวิชาชีพ</h3>
+        <p>ฝึกทักษะการประสานงานกับทีมแพทย์, พยาบาล และทีมสหวิชาชีพ</p>
+        <div class="course-meta">
+          <span>⏱ 3 ชั่วโมง</span>
+          <span>👨‍⚕️ รศ.ดร.วิชัย</span>
+          <span class="badge-free">ฟรี</span>
+        </div>
+      </div>
+    </div>
+    <div class="course-card">
+      <div class="course-thumb orange">🧠</div>
+      <div class="course-body">
+        <span class="course-tag orange">Critical Thinking</span>
+        <h3>การคิดเชิงวิเคราะห์ในสายสุขภาพ</h3>
+        <p>พัฒนาทักษะการตัดสินใจและแก้ปัญหาในสถานการณ์ทางคลินิก</p>
+        <div class="course-meta">
+          <span>⏱ 5 ชั่วโมง</span>
+          <span>👩‍⚕️ ผศ.ดร.อรุณ</span>
+          <span class="badge-free">ฟรี</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== NEWS ===== -->
+<section class="section section-alt">
+  <div class="section-header">
+    <div>
+      <div class="section-title">ข่าวสารและกิจกรรม</div>
+      <p class="section-sub" style="margin-bottom:0">อัปเดตล่าสุดจากคณะ</p>
+    </div>
+    <a href="others.html" class="link-all">ดูทั้งหมด →</a>
+  </div>
+  <div class="news-grid">
+    <div class="news-card">
+      <div class="news-thumb">📰</div>
+      <div class="news-body">
+        <p class="news-date">24 เม.ย. 2569</p>
+        <h3>Workshop "การสื่อสารกับผู้ป่วย" เปิดรับสมัครแล้ว</h3>
+        <p>Workshop เชิงปฏิบัติการจาก KKU Health Faculty พร้อมใบประกาศนียบัตร</p>
+      </div>
+    </div>
+    <div class="news-card">
+      <div class="news-thumb blue">🎤</div>
+      <div class="news-body">
+        <p class="news-date">20 เม.ย. 2569</p>
+        <h3>สัมมนา "Burnout ในบุคลากรการแพทย์ยุคใหม่"</h3>
+        <p>เชิญฟังผู้เชี่ยวชาญแบ่งปันประสบการณ์จริงและแนวทางจัดการ</p>
+      </div>
+    </div>
+    <div class="news-card">
+      <div class="news-thumb">🏆</div>
+      <div class="news-body">
+        <p class="news-date">15 เม.ย. 2569</p>
+        <h3>ประกาศผลผู้เรียนดีเด่นประจำไตรมาส</h3>
+        <p>ยินดีกับนักศึกษาทั้ง 10 คนที่มีพัฒนาการ Soft Skills โดดเด่น</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== CTA ===== -->
+<section class="section" style="background:linear-gradient(135deg,var(--green),var(--blue));text-align:center">
+  <h2 style="color:white;font-size:2rem;margin-bottom:0.75rem">พร้อมเริ่มพัฒนาตนเองแล้วหรือยัง?</h2>
+  <p style="color:rgba(255,255,255,0.88);margin-bottom:1.75rem;font-size:1.05rem">เรียนฟรี เรียนได้ทุกที่ทุกเวลา พร้อม AI ช่วยพัฒนาทักษะ</p>
+  <div style="display:flex;gap:1rem;justify-content:center;flex-wrap:wrap">
+    <a href="courses.html" class="btn btn-primary">📚 เริ่มเรียนคอร์สแรก</a>
+    <a href="chatbot.html" class="btn btn-outline">🤖 ลอง AI Chatbot</a>
+  </div>
+</section>
+
+<!-- ===== FOOTER ===== -->
+<footer>
+  <div class="footer-grid">
+    <div class="footer-brand">
+      <h2>🌿 KKU SkillBridge</h2>
+      <p>แพลตฟอร์มพัฒนา Soft Skills สำหรับนักศึกษาสายสุขภาพ<br/>คณะวิทยาศาสตร์สุขภาพ มหาวิทยาลัยขอนแก่น</p>
+    </div>
+    <div class="footer-col">
+      <h4>เมนูหลัก</h4>
+      <a href="index.html">Home</a>
+      <a href="courses.html">Courses</a>
+      <a href="chatbot.html">AI Chatbot</a>
+      <a href="others.html">Others</a>
+    </div>
+    <div class="footer-col">
+      <h4>Soft Skills</h4>
+      <a href="courses.html">Communication</a>
+      <a href="courses.html">Teamwork</a>
+      <a href="courses.html">Leadership</a>
+      <a href="courses.html">Empathy</a>
+    </div>
+    <div class="footer-col">
+      <h4>ช่วยเหลือ</h4>
+      <a href="others.html">Help Center</a>
+      <a href="others.html">FAQ</a>
+      <a href="profile.html">โปรไฟล์ของฉัน</a>
+    </div>
+  </div>
+  <div class="footer-bottom">© 2569 KKU SkillBridge — คณะวิทยาศาสตร์สุขภาพ มหาวิทยาลัยขอนแก่น</div>
+</footer>
+
+<!-- ===== QUIZ MODAL ===== -->
+<div class="modal-overlay" id="quizModal">
+  <div class="modal">
+    <button class="modal-close" onclick="closeQuiz()">✕</button>
+    <h2>🎯 ทดสอบระดับ Soft Skills</h2>
+    <p class="sub">ตอบ 5 ข้อ รับผลวิเคราะห์ทักษะส่วนตัวของคุณทันที</p>
+    <div class="quiz-progress-bar"><div class="quiz-progress-fill" style="width:0%"></div></div>
+    <div class="quiz-content">
+      <p class="quiz-question"></p>
+      <div class="quiz-options"></div>
+      <div class="quiz-nav">
+        <span class="q-counter" style="font-size:0.85rem;color:var(--grey-text)">ข้อ 1 / 5</span>
+        <div style="display:flex;gap:0.5rem">
+          <button id="prevBtn" class="btn" style="background:var(--grey-bg);color:var(--dark)" onclick="quizPrev()">‹ ย้อนกลับ</button>
+          <button id="nextBtn" class="btn btn-green" onclick="quizNext()">ถัดไป ›</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script src="js/main.js"></script>
+<script>document.addEventListener('DOMContentLoaded', () => { if(typeof renderQuestion === 'function') renderQuestion(); });</script>
+</body>
+</html>

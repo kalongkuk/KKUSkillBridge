@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>โปรไฟล์ — KKU SkillBridge</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Sarabun:wght@400;600;700;800;900&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+
+<nav class="navbar">
+  <a href="index.html" class="navbar-brand">
+    <div class="logo-icon">🌿</div>
+    KKU <span class="accent">Skill</span>Bridge
+  </a>
+  <div class="hamburger"><span></span><span></span><span></span></div>
+  <ul class="nav-links">
+    <li><a href="index.html">Home</a></li>
+    <li><a href="courses.html">Courses</a></li>
+    <li><a href="chatbot.html">AI Chatbot</a></li>
+    <li><a href="others.html">Others</a></li>
+  </ul>
+  <div class="nav-right">
+    <div style="position:relative">
+      <button class="btn-profile" id="profileBtn">👤</button>
+      <div class="dropdown-menu" id="dropdownMenu">
+        <a href="profile.html">👤 &nbsp;ข้อมูลบัญชี</a>
+        <a href="profile.html#courses">📚 &nbsp;คอร์สของฉัน</a>
+        <a href="profile.html#analysis">📊 &nbsp;AI Analysis</a>
+        <div class="divider"></div>
+        <a href="others.html">❓ &nbsp;Help Center</a>
+      </div>
+    </div>
+  </div>
+</nav>
+
+<div class="profile-layout">
+
+  <!-- Sidebar Card -->
+  <div>
+    <div class="profile-card">
+      <div class="profile-card-top">
+        <div class="profile-avatar">👤</div>
+        <h2>นักศึกษา KKU</h2>
+        <p>คณะวิทยาศาสตร์สุขภาพ</p>
+      </div>
+      <nav class="profile-nav">
+        <a href="#account" class="active">👤 &nbsp;ข้อมูลบัญชี</a>
+        <a href="#courses" id="courses">📚 &nbsp;คอร์สของฉัน</a>
+        <a href="#analysis" id="analysis">📊 &nbsp;AI Analysis</a>
+        <a href="#skill-test">🎯 &nbsp;ผลทดสอบทักษะ</a>
+        <a href="others.html#help">❓ &nbsp;Help Center</a>
+      </nav>
+    </div>
+
+    <!-- Quick Stats -->
+    <div style="background:white;border-radius:var(--radius);box-shadow:var(--shadow-sm);border:1px solid #edf2ef;padding:1.5rem;margin-top:1.25rem">
+      <h4 style="font-size:0.9rem;font-weight:700;margin-bottom:1rem;color:var(--grey-text)">สถิติของฉัน</h4>
+      <div style="display:flex;flex-direction:column;gap:0.85rem">
+        <div style="display:flex;justify-content:space-between;align-items:center">
+          <span style="font-size:0.88rem">คอร์สที่เรียนจบ</span>
+          <span style="font-weight:800;color:var(--green)">3 / 8</span>
+        </div>
+        <div style="display:flex;justify-content:space-between;align-items:center">
+          <span style="font-size:0.88rem">ชั่วโมงเรียน</span>
+          <span style="font-weight:800;color:var(--blue)">12.5 ชม.</span>
+        </div>
+        <div style="display:flex;justify-content:space-between;align-items:center">
+          <span style="font-size:0.88rem">บทสนทนากับ AI</span>
+          <span style="font-weight:800;color:var(--orange)">24 ครั้ง</span>
+        </div>
+        <div style="display:flex;justify-content:space-between;align-items:center">
+          <span style="font-size:0.88rem">กิจกรรมที่เข้าร่วม</span>
+          <span style="font-weight:800;color:var(--green)">5 กิจกรรม</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Main Content -->
+  <div class="profile-content-area">
+
+    <!-- Account Info -->
+    <div class="profile-section" id="account">
+      <h3>👤 ข้อมูลบัญชี</h3>
+      <div class="form-grid">
+        <div class="form-group">
+          <label>ชื่อ</label>
+          <input type="text" value="นักศึกษา" />
+        </div>
+        <div class="form-group">
+          <label>นามสกุล</label>
+          <input type="text" value="สายสุขภาพ" />
+        </div>
+        <div class="form-group">
+          <label>อีเมล</label>
+          <input type="email" value="student@kku.ac.th" />
+        </div>
+        <div class="form-group">
+          <label>รหัสนักศึกษา</label>
+          <input type="text" value="651234567" />
+        </div>
+        <div class="form-group">
+          <label>คณะ / สาขา</label>
+          <select>
+            <option>วิทยาศาสตร์สุขภาพ — พยาบาลศาสตร์</option>
+            <option>วิทยาศาสตร์สุขภาพ — กายภาพบำบัด</option>
+            <option>วิทยาศาสตร์สุขภาพ — เทคนิคการแพทย์</option>
+            <option>แพทยศาสตร์</option>
+            <option>ทันตแพทยศาสตร์</option>
+            <option>เภสัชศาสตร์</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>ชั้นปี</label>
+          <select>
+            <option>ปี 1</option>
+            <option>ปี 2</option>
+            <option selected>ปี 3</option>
+            <option>ปี 4</option>
+            <option>ปี 5</option>
+            <option>ปี 6</option>
+          </select>
+        </div>
+      </div>
+      <div style="margin-top:1.5rem;display:flex;gap:0.75rem">
+        <button class="btn btn-green" onclick="alert('บันทึกข้อมูลเรียบร้อยแล้ว!')">บันทึกการเปลี่ยนแปลง</button>
+        <button class="btn" style="background:var(--grey-bg);color:var(--dark)">ยกเลิก</button>
+      </div>
+    </div>
+
+    <!-- My Courses -->
+    <div class="profile-section" id="courses">
+      <h3>📚 คอร์สของฉัน</h3>
+      <div style="display:flex;flex-direction:column;gap:1rem">
+
+        <div style="display:flex;gap:1rem;align-items:center;padding:1rem;border:1px solid #edf2ef;border-radius:12px">
+          <div style="width:52px;height:52px;background:var(--green-pale);border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:1.5rem;flex-shrink:0">💬</div>
+          <div style="flex:1">
+            <h4 style="font-size:0.95rem;font-weight:700;margin-bottom:0.3rem">การสื่อสารกับผู้ป่วยและครอบครัว</h4>
+            <div style="height:6px;background:#e5ede9;border-radius:10px;overflow:hidden;margin-bottom:0.3rem">
+              <div style="height:100%;width:100%;background:var(--green);border-radius:10px"></div>
+            </div>
+            <span style="font-size:0.78rem;color:var(--green);font-weight:700">✅ เรียนจบแล้ว</span>
+          </div>
+          <a href="courses.html" class="btn btn-green" style="padding:0.5rem 1rem;font-size:0.82rem;flex-shrink:0">ดูใบประกาศ</a>
+        </div>
+
+        <div style="display:flex;gap:1rem;align-items:center;padding:1rem;border:1px solid #edf2ef;border-radius:12px">
+          <div style="width:52px;height:52px;background:var(--blue-light);border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:1.5rem;flex-shrink:0">🤝</div>
+          <div style="flex:1">
+            <h4 style="font-size:0.95rem;font-weight:700;margin-bottom:0.3rem">การทำงานเป็นทีมสหวิชาชีพ</h4>
+            <div style="height:6px;background:#e5ede9;border-radius:10px;overflow:hidden;margin-bottom:0.3rem">
+              <div style="height:100%;width:68%;background:var(--blue);border-radius:10px"></div>
+            </div>
+            <span style="font-size:0.78rem;color:var(--grey-text)">68% — กำลังเรียน</span>
+          </div>
+          <a href="courses.html" class="btn btn-green" style="padding:0.5rem 1rem;font-size:0.82rem;flex-shrink:0">เรียนต่อ →</a>
+        </div>
+
+        <div style="display:flex;gap:1rem;align-items:center;padding:1rem;border:1px solid #edf2ef;border-radius:12px">
+          <div style="width:52px;height:52px;background:var(--orange-light);border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:1.5rem;flex-shrink:0">🧠</div>
+          <div style="flex:1">
+            <h4 style="font-size:0.95rem;font-weight:700;margin-bottom:0.3rem">การคิดเชิงวิเคราะห์ในสายสุขภาพ</h4>
+            <div style="height:6px;background:#e5ede9;border-radius:10px;overflow:hidden;margin-bottom:0.3rem">
+              <div style="height:100%;width:30%;background:var(--orange);border-radius:10px"></div>
+            </div>
+            <span style="font-size:0.78rem;color:var(--grey-text)">30% — กำลังเรียน</span>
+          </div>
+          <a href="courses.html" class="btn btn-green" style="padding:0.5rem 1rem;font-size:0.82rem;flex-shrink:0">เรียนต่อ →</a>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- AI Analysis -->
+    <div class="profile-section" id="analysis">
+      <h3>📊 AI Analysis — วิเคราะห์ทักษะของฉัน</h3>
+      <p style="font-size:0.88rem;color:var(--grey-text);margin-bottom:1.5rem">วิเคราะห์จากประวัติการเรียน, ผลทดสอบ และบทสนทนากับ AI</p>
+
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:1.5rem;margin-bottom:1.75rem">
+        <div style="background:var(--green-pale);border-radius:12px;padding:1.2rem;text-align:center">
+          <div style="font-size:2.2rem;font-weight:900;color:var(--green)">72%</div>
+          <div style="font-size:0.85rem;color:var(--green);font-weight:700">Communication</div>
+          <div style="font-size:0.78rem;color:var(--grey-text);margin-top:0.2rem">↑ +8% จากเดือนที่แล้ว</div>
+        </div>
+        <div style="background:var(--blue-light);border-radius:12px;padding:1.2rem;text-align:center">
+          <div style="font-size:2.2rem;font-weight:900;color:#1a86aa">58%</div>
+          <div style="font-size:0.85rem;color:#1a86aa;font-weight:700">Empathy</div>
+          <div style="font-size:0.78rem;color:var(--grey-text);margin-top:0.2rem">↑ +3% จากเดือนที่แล้ว</div>
+        </div>
+        <div style="background:var(--orange-light);border-radius:12px;padding:1.2rem;text-align:center">
+          <div style="font-size:2.2rem;font-weight:900;color:var(--orange)">65%</div>
+          <div style="font-size:0.85rem;color:var(--orange);font-weight:700">Teamwork</div>
+          <div style="font-size:0.78rem;color:var(--grey-text);margin-top:0.2rem">↑ +12% จากเดือนที่แล้ว</div>
+        </div>
+        <div style="background:var(--green-pale);border-radius:12px;padding:1.2rem;text-align:center">
+          <div style="font-size:2.2rem;font-weight:900;color:var(--green)">45%</div>
+          <div style="font-size:0.85rem;color:var(--green);font-weight:700">Leadership</div>
+          <div style="font-size:0.78rem;color:var(--grey-text);margin-top:0.2rem">→ ยังต้องพัฒนา</div>
+        </div>
+      </div>
+
+      <div style="background:var(--grey-bg);border-radius:12px;padding:1.25rem;border-left:4px solid var(--green)">
+        <h4 style="font-size:0.95rem;font-weight:700;margin-bottom:0.75rem">💡 คำแนะนำจาก AI</h4>
+        <ul style="font-size:0.88rem;color:var(--grey-text);display:flex;flex-direction:column;gap:0.5rem;padding-left:1.25rem;list-style:disc">
+          <li>จุดแข็งของคุณคือ Communication — ควรต่อยอดด้วยการฝึก Role Play กับ SkillBot</li>
+          <li>Empathy ยังมีพื้นที่พัฒนา แนะนำคอร์ส "Empathy in Healthcare"</li>
+          <li>Leadership อยู่ในระดับที่ต้องเน้น แนะนำเข้าร่วมกิจกรรม Leadership Talk ในเดือนนี้</li>
+        </ul>
+        <a href="chatbot.html" class="btn btn-green" style="margin-top:1rem;display:inline-flex">🤖 คุยกับ AI เพื่อพัฒนาต่อ</a>
+      </div>
+    </div>
+
+    <!-- Skill Test Results -->
+    <div class="profile-section" id="skill-test">
+      <h3>🎯 ผลทดสอบทักษะล่าสุด</h3>
+      <div class="progress-list">
+        <div class="progress-item">
+          <div class="progress-item-icon">💬</div>
+          <div class="progress-item-info">
+            <h4>Communication</h4>
+            <div class="progress-item-bar"><div class="progress-item-fill" style="width:72%"></div></div>
+          </div>
+          <span class="progress-item-pct">72%</span>
+        </div>
+        <div class="progress-item">
+          <div class="progress-item-icon">💙</div>
+          <div class="progress-item-info">
+            <h4>Empathy</h4>
+            <div class="progress-item-bar"><div class="progress-item-fill" style="width:58%;background:var(--blue)"></div></div>
+          </div>
+          <span class="progress-item-pct">58%</span>
+        </div>
+        <div class="progress-item">
+          <div class="progress-item-icon">🤝</div>
+          <div class="progress-item-info">
+            <h4>Teamwork</h4>
+            <div class="progress-item-bar"><div class="progress-item-fill" style="width:65%"></div></div>
+          </div>
+          <span class="progress-item-pct">65%</span>
+        </div>
+        <div class="progress-item">
+          <div class="progress-item-icon">🧠</div>
+          <div class="progress-item-info">
+            <h4>Critical Thinking</h4>
+            <div class="progress-item-bar"><div class="progress-item-fill" style="width:80%"></div></div>
+          </div>
+          <span class="progress-item-pct">80%</span>
+        </div>
+        <div class="progress-item">
+          <div class="progress-item-icon">🧘</div>
+          <div class="progress-item-info">
+            <h4>Stress Management</h4>
+            <div class="progress-item-bar"><div class="progress-item-fill" style="width:50%;background:var(--orange)"></div></div>
+          </div>
+          <span class="progress-item-pct">50%</span>
+        </div>
+      </div>
+      <button class="btn btn-green" style="margin-top:1.5rem" onclick="window.location.href='index.html'">🎯 ทดสอบอีกครั้ง</button>
+    </div>
+
+  </div>
+</div>
+
+<footer>
+  <div class="footer-grid">
+    <div class="footer-brand">
+      <h2>🌿 KKU SkillBridge</h2>
+      <p>แพลตฟอร์มพัฒนา Soft Skills สำหรับนักศึกษาสายสุขภาพ<br/>คณะวิทยาศาสตร์สุขภาพ มหาวิทยาลัยขอนแก่น</p>
+    </div>
+    <div class="footer-col"><h4>เมนูหลัก</h4><a href="index.html">Home</a><a href="courses.html">Courses</a><a href="chatbot.html">AI Chatbot</a><a href="others.html">Others</a></div>
+    <div class="footer-col"><h4>Soft Skills</h4><a href="courses.html">Communication</a><a href="courses.html">Teamwork</a><a href="courses.html">Leadership</a><a href="courses.html">Empathy</a></div>
+    <div class="footer-col"><h4>ช่วยเหลือ</h4><a href="others.html#help">Help Center</a><a href="profile.html">โปรไฟล์</a></div>
+  </div>
+  <div class="footer-bottom">© 2569 KKU SkillBridge — คณะวิทยาศาสตร์สุขภาพ มหาวิทยาลัยขอนแก่น</div>
+</footer>
+
+<script src="js/main.js"></script>
+</body>
+</html>

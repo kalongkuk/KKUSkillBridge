@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Others — KKU SkillBridge</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Sarabun:wght@400;600;700;800;900&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+
+<nav class="navbar">
+  <a href="index.html" class="navbar-brand">
+    <div class="logo-icon">🌿</div>
+    KKU <span class="accent">Skill</span>Bridge
+  </a>
+  <div class="hamburger"><span></span><span></span><span></span></div>
+  <ul class="nav-links">
+    <li><a href="index.html">Home</a></li>
+    <li><a href="courses.html">Courses</a></li>
+    <li><a href="chatbot.html">AI Chatbot</a></li>
+    <li><a href="others.html" class="active">Others</a></li>
+  </ul>
+  <div class="nav-right">
+    <div style="position:relative">
+      <button class="btn-profile" id="profileBtn">👤</button>
+      <div class="dropdown-menu" id="dropdownMenu">
+        <a href="profile.html">👤 &nbsp;ข้อมูลบัญชี</a>
+        <a href="profile.html#courses">📚 &nbsp;คอร์สของฉัน</a>
+        <div class="divider"></div>
+        <a href="others.html">❓ &nbsp;Help Center</a>
+      </div>
+    </div>
+  </div>
+</nav>
+
+<div class="page-hero">
+  <h1>📌 Others</h1>
+  <p>กิจกรรม บทความ Podcast และข่าวสารจากคณะวิทยาศาสตร์สุขภาพ</p>
+</div>
+
+<!-- ===== EVENT CALENDAR ===== -->
+<section class="section">
+  <div class="section-header" style="margin-bottom:1.5rem">
+    <div>
+      <div class="section-title">📅 Event Calendar</div>
+      <p class="section-sub" style="margin-bottom:0">กิจกรรมและสัมมนาประจำเดือน</p>
+    </div>
+    <div style="display:flex;gap:0.75rem;align-items:center">
+      <button id="calPrev" style="width:36px;height:36px;border-radius:50%;border:2px solid #e5ede9;background:white;cursor:pointer;font-size:1rem;display:flex;align-items:center;justify-content:center">‹</button>
+      <span id="calMonthTitle" style="font-weight:700;font-size:1rem;min-width:140px;text-align:center"></span>
+      <button id="calNext" style="width:36px;height:36px;border-radius:50%;border:2px solid #e5ede9;background:white;cursor:pointer;font-size:1rem;display:flex;align-items:center;justify-content:center">›</button>
+    </div>
+  </div>
+  <div class="calendar-grid" id="calendarGrid"></div>
+
+  <!-- Upcoming Events -->
+  <div style="margin-top:2rem">
+    <h3 style="font-size:1.05rem;font-weight:700;margin-bottom:1rem">กิจกรรมที่กำลังจะมาถึง</h3>
+    <div style="display:flex;flex-direction:column;gap:0.85rem">
+      <div style="display:flex;gap:1rem;align-items:center;padding:1rem;background:white;border-radius:12px;box-shadow:var(--shadow-sm);border:1px solid #edf2ef">
+        <div style="min-width:52px;height:52px;background:var(--green-pale);border-radius:12px;display:flex;flex-direction:column;align-items:center;justify-content:center">
+          <span style="font-size:0.7rem;color:var(--green);font-weight:700">พ.ค.</span>
+          <span style="font-size:1.2rem;font-weight:900;color:var(--green);line-height:1">8</span>
+        </div>
+        <div>
+          <h4 style="font-size:0.95rem;font-weight:700">Communication Workshop</h4>
+          <p style="font-size:0.83rem;color:var(--grey-text)">⏰ 09:00–12:00 น. &nbsp;|&nbsp; 📍 ห้องประชุม 1 อาคารคณะ</p>
+        </div>
+        <a href="#" class="btn btn-green" style="margin-left:auto;padding:0.5rem 1rem;font-size:0.82rem">สมัคร</a>
+      </div>
+      <div style="display:flex;gap:1rem;align-items:center;padding:1rem;background:white;border-radius:12px;box-shadow:var(--shadow-sm);border:1px solid #edf2ef">
+        <div style="min-width:52px;height:52px;background:var(--blue-light);border-radius:12px;display:flex;flex-direction:column;align-items:center;justify-content:center">
+          <span style="font-size:0.7rem;color:#1a86aa;font-weight:700">พ.ค.</span>
+          <span style="font-size:1.2rem;font-weight:900;color:#1a86aa;line-height:1">10</span>
+        </div>
+        <div>
+          <h4 style="font-size:0.95rem;font-weight:700">Teamwork Seminar — สหวิชาชีพ</h4>
+          <p style="font-size:0.83rem;color:var(--grey-text)">⏰ 13:00–16:00 น. &nbsp;|&nbsp; 📍 Zoom Online</p>
+        </div>
+        <a href="#" class="btn btn-green" style="margin-left:auto;padding:0.5rem 1rem;font-size:0.82rem">สมัคร</a>
+      </div>
+      <div style="display:flex;gap:1rem;align-items:center;padding:1rem;background:white;border-radius:12px;box-shadow:var(--shadow-sm);border:1px solid #edf2ef">
+        <div style="min-width:52px;height:52px;background:var(--orange-light);border-radius:12px;display:flex;flex-direction:column;align-items:center;justify-content:center">
+          <span style="font-size:0.7rem;color:var(--orange);font-weight:700">พ.ค.</span>
+          <span style="font-size:1.2rem;font-weight:900;color:var(--orange);line-height:1">15</span>
+        </div>
+        <div>
+          <h4 style="font-size:0.95rem;font-weight:700">Leadership Talk — บุคลากรรุ่นใหม่</h4>
+          <p style="font-size:0.83rem;color:var(--grey-text)">⏰ 10:00–12:00 น. &nbsp;|&nbsp; 📍 ห้องประชุมใหญ่ ชั้น 3</p>
+        </div>
+        <a href="#" class="btn btn-green" style="margin-left:auto;padding:0.5rem 1rem;font-size:0.82rem">สมัคร</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== ARTICLES & PODCASTS ===== -->
+<section class="section section-alt">
+  <div class="section-title">คลังความรู้</div>
+  <p class="section-sub">บทความ, Podcast และข่าวสารสำหรับนักศึกษาสายสุขภาพ</p>
+
+  <div class="tabs">
+    <button class="tab-btn active" data-tab="tab-articles">📰 บทความ</button>
+    <button class="tab-btn" data-tab="tab-podcasts">🎙 Podcast</button>
+    <button class="tab-btn" data-tab="tab-news">📣 ข่าวสาร</button>
+  </div>
+
+  <!-- Articles -->
+  <div class="tab-panel active" id="tab-articles">
+    <div class="news-grid">
+      <div class="news-card">
+        <div class="news-thumb">💬</div>
+        <div class="news-body">
+          <p class="news-date">📅 22 เม.ย. 2569 &nbsp;·&nbsp; 5 นาทีอ่าน</p>
+          <h3>5 เทคนิค Active Listening ที่บุคลากรการแพทย์ต้องรู้</h3>
+          <p>การฟังอย่างตั้งใจไม่ใช่แค่การได้ยิน แต่คือการเข้าใจความต้องการที่ซ่อนอยู่ของผู้ป่วย...</p>
+        </div>
+      </div>
+      <div class="news-card">
+        <div class="news-thumb blue">🧠</div>
+        <div class="news-body">
+          <p class="news-date">📅 18 เม.ย. 2569 &nbsp;·&nbsp; 7 นาทีอ่าน</p>
+          <h3>Burnout ในบุคลากรสาธารณสุข: รู้จัก รับมือ ป้องกัน</h3>
+          <p>ภาวะหมดไฟในการทำงานพบบ่อยในสายสุขภาพ มาเรียนรู้สัญญาณเตือนและวิธีรับมือ...</p>
+        </div>
+      </div>
+      <div class="news-card">
+        <div class="news-thumb">🤝</div>
+        <div class="news-body">
+          <p class="news-date">📅 15 เม.ย. 2569 &nbsp;·&nbsp; 4 นาทีอ่าน</p>
+          <h3>Interprofessional Collaboration คืออะไรและทำไมถึงสำคัญ</h3>
+          <p>การทำงานร่วมกันระหว่างสหวิชาชีพช่วยลดความผิดพลาดและเพิ่มคุณภาพการดูแลผู้ป่วย...</p>
+        </div>
+      </div>
+      <div class="news-card">
+        <div class="news-thumb orange">💙</div>
+        <div class="news-body">
+          <p class="news-date">📅 10 เม.ย. 2569 &nbsp;·&nbsp; 6 นาทีอ่าน</p>
+          <h3>Empathy vs Sympathy: ต่างกันอย่างไรในบริบทการแพทย์</h3>
+          <p>หลายคนสับสนระหว่างการเห็นใจ (Sympathy) กับการเข้าใจ (Empathy) มาทำความเข้าใจกัน...</p>
+        </div>
+      </div>
+      <div class="news-card">
+        <div class="news-thumb blue">👑</div>
+        <div class="news-body">
+          <p class="news-date">📅 5 เม.ย. 2569 &nbsp;·&nbsp; 8 นาทีอ่าน</p>
+          <h3>ภาวะผู้นำในยุค Healthcare 4.0</h3>
+          <p>เทคโนโลยีเปลี่ยนแปลงวิธีการดูแลสุขภาพ ผู้นำสายสุขภาพต้องปรับตัวอย่างไร...</p>
+        </div>
+      </div>
+      <div class="news-card">
+        <div class="news-thumb">🌱</div>
+        <div class="news-body">
+          <p class="news-date">📅 1 เม.ย. 2569 &nbsp;·&nbsp; 3 นาทีอ่าน</p>
+          <h3>Growth Mindset สำหรับนักศึกษาสายสุขภาพ</h3>
+          <p>แนวคิด Growth Mindset ของ Carol Dweck ช่วยให้นักศึกษาก้าวข้ามความกลัวความผิดพลาด...</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Podcasts -->
+  <div class="tab-panel" id="tab-podcasts">
+    <div class="podcast-list">
+      <div class="podcast-card">
+        <div class="podcast-thumb">🎙</div>
+        <div class="podcast-info">
+          <h4>EP.12 — การสื่อสารในสถานการณ์ฉุกเฉิน</h4>
+          <p>รศ.ดร.วิชัย พงษ์ศรี พูดถึงเทคนิคสื่อสารเมื่อกดดันสูง</p>
+          <div class="duration">🕐 28 นาที &nbsp;·&nbsp; 📅 20 เม.ย. 2569</div>
+        </div>
+        <div class="podcast-play">▶</div>
+      </div>
+      <div class="podcast-card">
+        <div class="podcast-thumb blue">🎙</div>
+        <div class="podcast-info">
+          <h4>EP.11 — Mindfulness ในห้องฉุกเฉิน</h4>
+          <p>อ.สายใจ แสนดี แนะนำเทคนิค Mindfulness 5 นาทีระหว่างกะ</p>
+          <div class="duration">🕐 22 นาที &nbsp;·&nbsp; 📅 13 เม.ย. 2569</div>
+        </div>
+        <div class="podcast-play">▶</div>
+      </div>
+      <div class="podcast-card">
+        <div class="podcast-thumb">🎙</div>
+        <div class="podcast-info">
+          <h4>EP.10 — เส้นทางสู่ภาวะผู้นำ: มุมมองจากพยาบาลหัวหน้าหอ</h4>
+          <p>บทสนทนากับพยาบาลวิชาชีพที่ก้าวสู่ตำแหน่งบริหารในวัย 32 ปี</p>
+          <div class="duration">🕐 35 นาที &nbsp;·&nbsp; 📅 6 เม.ย. 2569</div>
+        </div>
+        <div class="podcast-play">▶</div>
+      </div>
+      <div class="podcast-card">
+        <div class="podcast-thumb blue">🎙</div>
+        <div class="podcast-info">
+          <h4>EP.9 — Empathy ที่แท้จริงคืออะไร ในสายตาผู้ป่วย</h4>
+          <p>ผู้ป่วยโรคเรื้อรังแบ่งปันประสบการณ์ตรงกับบุคลากรที่ดีและไม่ดี</p>
+          <div class="duration">🕐 18 นาที &nbsp;·&nbsp; 📅 30 มี.ค. 2569</div>
+        </div>
+        <div class="podcast-play">▶</div>
+      </div>
+      <div class="podcast-card">
+        <div class="podcast-thumb">🎙</div>
+        <div class="podcast-info">
+          <h4>EP.8 — AI กับอนาคตของ Soft Skills ในสายสุขภาพ</h4>
+          <p>เทคโนโลยี AI จะมาแทนที่ความเห็นอกเห็นใจของมนุษย์ได้ไหม?</p>
+          <div class="duration">🕐 42 นาที &nbsp;·&nbsp; 📅 23 มี.ค. 2569</div>
+        </div>
+        <div class="podcast-play">▶</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- News -->
+  <div class="tab-panel" id="tab-news">
+    <div class="news-grid">
+      <div class="news-card">
+        <div class="news-thumb">🏆</div>
+        <div class="news-body">
+          <p class="news-date">📅 24 เม.ย. 2569</p>
+          <h3>KKU SkillBridge คว้ารางวัล Best EdTech Platform 2569</h3>
+          <p>แพลตฟอร์มของเราได้รับการยอมรับจากสมาคมการศึกษาไทยในด้านนวัตกรรมการเรียนรู้</p>
+        </div>
+      </div>
+      <div class="news-card">
+        <div class="news-thumb blue">📢</div>
+        <div class="news-body">
+          <p class="news-date">📅 20 เม.ย. 2569</p>
+          <h3>เปิดรับสมัคร Workshop Communication Skills รุ่น 3</h3>
+          <p>รับจำนวนจำกัด 30 คน สมัครได้ที่ Event Calendar ก่อน 5 พ.ค. นี้</p>
+        </div>
+      </div>
+      <div class="news-card">
+        <div class="news-thumb">🤖</div>
+        <div class="news-body">
+          <p class="news-date">📅 15 เม.ย. 2569</p>
+          <h3>อัปเดต SkillBot v2.0 — เพิ่มโหมด Role Play ใหม่ 10 สถานการณ์</h3>
+          <p>AI Chatbot ของเราได้รับการอัปเกรดพร้อมสถานการณ์จริงจากคลินิกทั่วประเทศ</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== HELP CENTER ===== -->
+<section class="section" id="help">
+  <div class="section-title">❓ Help Center</div>
+  <p class="section-sub">คำถามที่พบบ่อย</p>
+  <div style="display:flex;flex-direction:column;gap:0.75rem;max-width:720px">
+    <details style="background:white;border-radius:12px;padding:1.2rem;box-shadow:var(--shadow-sm);border:1px solid #edf2ef;cursor:pointer">
+      <summary style="font-weight:700;font-size:0.95rem;list-style:none;display:flex;justify-content:space-between">คอร์สทั้งหมดเรียนฟรีจริงหรือเปล่า? <span>+</span></summary>
+      <p style="margin-top:0.75rem;font-size:0.88rem;color:var(--grey-text)">ใช่ครับ คอร์สทุกคอร์สบน KKU SkillBridge เปิดให้นักศึกษาและบุคลากรคณะวิทยาศาสตร์สุขภาพ มข. เรียนฟรีโดยไม่มีค่าใช้จ่าย</p>
+    </details>
+    <details style="background:white;border-radius:12px;padding:1.2rem;box-shadow:var(--shadow-sm);border:1px solid #edf2ef;cursor:pointer">
+      <summary style="font-weight:700;font-size:0.95rem;list-style:none;display:flex;justify-content:space-between">AI Chatbot ใช้ได้ตลอด 24 ชั่วโมงไหม? <span>+</span></summary>
+      <p style="margin-top:0.75rem;font-size:0.88rem;color:var(--grey-text)">ใช่ครับ SkillBot พร้อมให้บริการ 24/7 สามารถถาม-ตอบ, ฝึก Role Play และทำ Reflection ได้ตลอดเวลา</p>
+    </details>
+    <details style="background:white;border-radius:12px;padding:1.2rem;box-shadow:var(--shadow-sm);border:1px solid #edf2ef;cursor:pointer">
+      <summary style="font-weight:700;font-size:0.95rem;list-style:none;display:flex;justify-content:space-between">มีใบประกาศนียบัตรหลังเรียนจบหรือเปล่า? <span>+</span></summary>
+      <p style="margin-top:0.75rem;font-size:0.88rem;color:var(--grey-text)">คอร์สบางรายการมีใบประกาศนียบัตรดิจิทัลจากคณะ โดยจะระบุไว้ในรายละเอียดของแต่ละคอร์ส</p>
+    </details>
+    <details style="background:white;border-radius:12px;padding:1.2rem;box-shadow:var(--shadow-sm);border:1px solid #edf2ef;cursor:pointer">
+      <summary style="font-weight:700;font-size:0.95rem;list-style:none;display:flex;justify-content:space-between">ผลการทดสอบทักษะจะถูกส่งให้อาจารย์ไหม? <span>+</span></summary>
+      <p style="margin-top:0.75rem;font-size:0.88rem;color:var(--grey-text)">ไม่ครับ ผลการทดสอบทักษะใช้เพื่อแนะนำคอร์สที่เหมาะกับคุณเท่านั้น ไม่มีการส่งข้อมูลให้บุคคลอื่น</p>
+    </details>
+    <details style="background:white;border-radius:12px;padding:1.2rem;box-shadow:var(--shadow-sm);border:1px solid #edf2ef;cursor:pointer">
+      <summary style="font-weight:700;font-size:0.95rem;list-style:none;display:flex;justify-content:space-between">ติดต่อทีมงานได้ที่ไหน? <span>+</span></summary>
+      <p style="margin-top:0.75rem;font-size:0.88rem;color:var(--grey-text)">ติดต่อได้ที่อีเมล skillbridge@kku.ac.th หรือเฟสบุ๊ก KKU Health Science Faculty ในวันและเวลาราชการ</p>
+    </details>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-grid">
+    <div class="footer-brand">
+      <h2>🌿 KKU SkillBridge</h2>
+      <p>แพลตฟอร์มพัฒนา Soft Skills สำหรับนักศึกษาสายสุขภาพ<br/>คณะวิทยาศาสตร์สุขภาพ มหาวิทยาลัยขอนแก่น</p>
+    </div>
+    <div class="footer-col"><h4>เมนูหลัก</h4><a href="index.html">Home</a><a href="courses.html">Courses</a><a href="chatbot.html">AI Chatbot</a><a href="others.html">Others</a></div>
+    <div class="footer-col"><h4>Soft Skills</h4><a href="courses.html">Communication</a><a href="courses.html">Teamwork</a><a href="courses.html">Leadership</a><a href="courses.html">Empathy</a></div>
+    <div class="footer-col"><h4>ช่วยเหลือ</h4><a href="#help">Help Center</a><a href="#help">FAQ</a><a href="profile.html">โปรไฟล์</a></div>
+  </div>
+  <div class="footer-bottom">© 2569 KKU SkillBridge — คณะวิทยาศาสตร์สุขภาพ มหาวิทยาลัยขอนแก่น</div>
+</footer>
+
+<script src="js/main.js"></script>
+</body>
+</html>
