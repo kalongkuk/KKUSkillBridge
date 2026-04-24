@@ -7,6 +7,31 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link href="https://fonts.googleapis.com/css2?family=Sarabun:wght@400;600;700;800;900&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="css/style.css" />
+  <style>
+    .test-badges {
+      display: flex; gap: 0.4rem; margin-bottom: 0.6rem; flex-wrap: wrap;
+    }
+    .badge-test {
+      font-size: 0.7rem; font-weight: 700;
+      padding: 0.18rem 0.55rem;
+      border-radius: 100px;
+    }
+    .badge-pre  { background: #fff3e0; color: #e65100; }
+    .badge-post { background: #e8f5e9; color: #2e7d32; }
+    .badge-ai   { background: var(--blue-light); color: #1a86aa; }
+    .clip-count {
+      font-size: 0.78rem; color: var(--grey-text);
+      display: flex; align-items: center; gap: 0.3rem;
+    }
+    .course-card { cursor: pointer; }
+    .course-card:hover .go-btn { opacity: 1; }
+    .go-btn {
+      display: inline-flex; align-items: center; gap: 0.4rem;
+      font-size: 0.82rem; font-weight: 700; color: var(--green);
+      opacity: 0; transition: var(--transition);
+      margin-top: 0.5rem;
+    }
+  </style>
 </head>
 <body>
 
@@ -38,7 +63,19 @@
 
 <div class="page-hero">
   <h1>📚 คอร์ส Soft Skills</h1>
-  <p>เรียนฟรีทุกคอร์ส ออกแบบเฉพาะสำหรับนักศึกษาและบุคลากรสายสุขภาพ</p>
+  <p>เรียนฟรีทุกคอร์ส · คลิปสั้น 15–30 นาที · มี Pre-Test & Post-Test ทุกคอร์ส</p>
+</div>
+
+<!-- Info banner -->
+<div style="background:var(--blue-light);border-bottom:1px solid #c8e8f5;padding:0.85rem 2.5rem;display:flex;align-items:center;gap:1rem;flex-wrap:wrap">
+  <span style="font-size:0.88rem;color:#1a86aa;font-weight:600">📌 วิธีเรียน:</span>
+  <span style="font-size:0.85rem;color:#1a86aa">① ทำ <strong>Pre-Test</strong> วัดความรู้เดิม</span>
+  <span style="font-size:1rem;color:#9cc">→</span>
+  <span style="font-size:0.85rem;color:#1a86aa">② ดู <strong>คลิปสั้น 15–30 นาที</strong></span>
+  <span style="font-size:1rem;color:#9cc">→</span>
+  <span style="font-size:0.85rem;color:#1a86aa">③ ทำ <strong>Post-Test</strong> วัดพัฒนาการ</span>
+  <span style="font-size:1rem;color:#9cc">→</span>
+  <span style="font-size:0.85rem;color:#1a86aa">④ ฝึกต่อกับ <strong>AI Chatbot</strong></span>
 </div>
 
 <div class="filters-bar">
@@ -55,220 +92,319 @@
   </div>
 </div>
 
+<!-- ===== Communication ===== -->
 <section class="section">
   <div class="section-header" style="margin-bottom:1.5rem">
-    <div>
-      <div class="section-title" style="font-size:1.2rem">Communication Skills</div>
-    </div>
+    <div><div class="section-title" style="font-size:1.2rem">💬 Communication Skills</div></div>
   </div>
   <div class="courses-grid">
 
-    <div class="course-card" data-category="communication">
+    <div class="course-card" data-category="communication" onclick="location.href='course-detail.html?course=1'">
       <div class="course-thumb">💬</div>
       <div class="course-body">
+        <div class="test-badges">
+          <span class="badge-test badge-pre">📝 Pre-Test</span>
+          <span class="badge-test badge-post">✅ Post-Test</span>
+          <span class="badge-test badge-ai">🤖 AI Practice</span>
+        </div>
         <span class="course-tag">Communication</span>
         <h3>การสื่อสารกับผู้ป่วยและครอบครัว</h3>
         <p>เรียนรู้เทคนิคการสื่อสารที่มีประสิทธิภาพ เข้าใจง่าย ลดความเข้าใจผิด</p>
         <div class="course-meta">
-          <span>⏱ 4 ชม.</span>
-          <span>👩‍⚕️ ผศ.ดร.สมใจ</span>
+          <span class="clip-count">🎬 5 คลิป · 15–22 นาที/คลิป</span>
           <span class="badge-free">ฟรี</span>
         </div>
+        <div class="course-meta" style="margin-top:0.3rem">
+          <span>👩‍⚕️ ผศ.ดร.สมใจ</span>
+        </div>
+        <div class="go-btn">เริ่มเรียน →</div>
       </div>
     </div>
 
-    <div class="course-card" data-category="communication">
+    <div class="course-card" data-category="communication" onclick="location.href='course-detail.html?course=2'">
       <div class="course-thumb">👂</div>
       <div class="course-body">
+        <div class="test-badges">
+          <span class="badge-test badge-pre">📝 Pre-Test</span>
+          <span class="badge-test badge-post">✅ Post-Test</span>
+          <span class="badge-test badge-ai">🤖 AI Practice</span>
+        </div>
         <span class="course-tag">Communication</span>
         <h3>Active Listening — การฟังเชิงรุก</h3>
         <p>ฝึกทักษะการฟังอย่างตั้งใจ เพื่อเข้าใจความต้องการที่แท้จริงของผู้ป่วย</p>
         <div class="course-meta">
-          <span>⏱ 2 ชม.</span>
-          <span>👨‍⚕️ อ.ดร.ประภัส</span>
+          <span class="clip-count">🎬 4 คลิป · 18–28 นาที/คลิป</span>
           <span class="badge-free">ฟรี</span>
         </div>
+        <div class="course-meta" style="margin-top:0.3rem">
+          <span>👨‍⚕️ อ.ดร.ประภัส</span>
+        </div>
+        <div class="go-btn">เริ่มเรียน →</div>
       </div>
     </div>
 
-    <div class="course-card" data-category="communication">
+    <div class="course-card" data-category="communication" onclick="location.href='course-detail.html?course=3'">
       <div class="course-thumb blue">📋</div>
       <div class="course-body">
+        <div class="test-badges">
+          <span class="badge-test badge-pre">📝 Pre-Test</span>
+          <span class="badge-test badge-post">✅ Post-Test</span>
+        </div>
         <span class="course-tag blue">Communication</span>
         <h3>การเขียนและรายงานทางคลินิก</h3>
         <p>เขียนรายงานและบันทึกทางคลินิกอย่างมืออาชีพ ชัดเจน ครบถ้วน</p>
         <div class="course-meta">
-          <span>⏱ 3 ชม.</span>
-          <span>👩‍⚕️ รศ.ดร.นันทิยา</span>
+          <span class="clip-count">🎬 4 คลิป · 20–30 นาที/คลิป</span>
           <span class="badge-free">ฟรี</span>
         </div>
+        <div class="course-meta" style="margin-top:0.3rem">
+          <span>👩‍⚕️ รศ.ดร.นันทิยา</span>
+        </div>
+        <div class="go-btn">เริ่มเรียน →</div>
       </div>
     </div>
 
   </div>
 </section>
 
+<!-- ===== Teamwork ===== -->
 <section class="section section-alt">
   <div class="section-header" style="margin-bottom:1.5rem">
-    <div><div class="section-title" style="font-size:1.2rem">Teamwork & Collaboration</div></div>
+    <div><div class="section-title" style="font-size:1.2rem">🤝 Teamwork & Collaboration</div></div>
   </div>
   <div class="courses-grid">
 
-    <div class="course-card" data-category="teamwork">
+    <div class="course-card" data-category="teamwork" onclick="location.href='course-detail.html?course=3'">
       <div class="course-thumb blue">🤝</div>
       <div class="course-body">
+        <div class="test-badges">
+          <span class="badge-test badge-pre">📝 Pre-Test</span>
+          <span class="badge-test badge-post">✅ Post-Test</span>
+          <span class="badge-test badge-ai">🤖 AI Practice</span>
+        </div>
         <span class="course-tag blue">Teamwork</span>
         <h3>การทำงานเป็นทีมสหวิชาชีพ</h3>
         <p>ประสานงานกับทีมแพทย์, พยาบาล, นักกายภาพ และสหวิชาชีพอื่นๆ</p>
         <div class="course-meta">
-          <span>⏱ 3 ชม.</span>
-          <span>👨‍⚕️ รศ.ดร.วิชัย</span>
+          <span class="clip-count">🎬 5 คลิป · 15–25 นาที/คลิป</span>
           <span class="badge-free">ฟรี</span>
         </div>
+        <div class="course-meta" style="margin-top:0.3rem">
+          <span>👨‍⚕️ รศ.ดร.วิชัย</span>
+        </div>
+        <div class="go-btn">เริ่มเรียน →</div>
       </div>
     </div>
 
-    <div class="course-card" data-category="teamwork">
+    <div class="course-card" data-category="teamwork" onclick="location.href='course-detail.html?course=4'">
       <div class="course-thumb blue">⚡</div>
       <div class="course-body">
+        <div class="test-badges">
+          <span class="badge-test badge-pre">📝 Pre-Test</span>
+          <span class="badge-test badge-post">✅ Post-Test</span>
+        </div>
         <span class="course-tag blue">Teamwork</span>
         <h3>การจัดการความขัดแย้งในทีม</h3>
         <p>เรียนรู้วิธีแก้ไขความขัดแย้งอย่างสร้างสรรค์ รักษาความสัมพันธ์ในทีม</p>
         <div class="course-meta">
-          <span>⏱ 2.5 ชม.</span>
-          <span>👩‍⚕️ ผศ.ดร.ชนิดา</span>
+          <span class="clip-count">🎬 4 คลิป · 18–28 นาที/คลิป</span>
           <span class="badge-free">ฟรี</span>
         </div>
+        <div class="course-meta" style="margin-top:0.3rem">
+          <span>👩‍⚕️ ผศ.ดร.ชนิดา</span>
+        </div>
+        <div class="go-btn">เริ่มเรียน →</div>
       </div>
     </div>
 
-    <div class="course-card" data-category="teamwork">
+    <div class="course-card" data-category="teamwork" onclick="location.href='course-detail.html?course=5'">
       <div class="course-thumb">🔄</div>
       <div class="course-body">
+        <div class="test-badges">
+          <span class="badge-test badge-pre">📝 Pre-Test</span>
+          <span class="badge-test badge-post">✅ Post-Test</span>
+        </div>
         <span class="course-tag">Teamwork</span>
         <h3>Handover Communication ในสายสุขภาพ</h3>
         <p>ส่งมอบงานและข้อมูลผู้ป่วยระหว่างกะอย่างปลอดภัยและมีประสิทธิภาพ</p>
         <div class="course-meta">
-          <span>⏱ 2 ชม.</span>
-          <span>👨‍⚕️ อ.สุภาพ</span>
+          <span class="clip-count">🎬 3 คลิป · 20–30 นาที/คลิป</span>
           <span class="badge-free">ฟรี</span>
         </div>
+        <div class="course-meta" style="margin-top:0.3rem">
+          <span>👨‍⚕️ อ.สุภาพ</span>
+        </div>
+        <div class="go-btn">เริ่มเรียน →</div>
       </div>
     </div>
 
   </div>
 </section>
 
+<!-- ===== Leadership & Critical ===== -->
 <section class="section">
   <div class="section-header" style="margin-bottom:1.5rem">
-    <div><div class="section-title" style="font-size:1.2rem">Leadership & Critical Thinking</div></div>
+    <div><div class="section-title" style="font-size:1.2rem">👑 Leadership & Critical Thinking</div></div>
   </div>
   <div class="courses-grid">
 
-    <div class="course-card" data-category="leadership">
+    <div class="course-card" data-category="leadership" onclick="location.href='course-detail.html?course=4'">
       <div class="course-thumb orange">👑</div>
       <div class="course-body">
+        <div class="test-badges">
+          <span class="badge-test badge-pre">📝 Pre-Test</span>
+          <span class="badge-test badge-post">✅ Post-Test</span>
+          <span class="badge-test badge-ai">🤖 AI Practice</span>
+        </div>
         <span class="course-tag orange">Leadership</span>
         <h3>ภาวะผู้นำสำหรับบุคลากรสายสุขภาพ</h3>
         <p>พัฒนาทักษะผู้นำ การตัดสินใจ และการบริหารทีมในสถานการณ์กดดัน</p>
         <div class="course-meta">
-          <span>⏱ 6 ชม.</span>
-          <span>👩‍⚕️ รศ.ดร.กมลรัตน์</span>
+          <span class="clip-count">🎬 6 คลิป · 20–30 นาที/คลิป</span>
           <span class="badge-free">ฟรี</span>
         </div>
+        <div class="course-meta" style="margin-top:0.3rem">
+          <span>👩‍⚕️ รศ.ดร.กมลรัตน์</span>
+        </div>
+        <div class="go-btn">เริ่มเรียน →</div>
       </div>
     </div>
 
-    <div class="course-card" data-category="critical">
+    <div class="course-card" data-category="critical" onclick="location.href='course-detail.html?course=4'">
       <div class="course-thumb orange">🧠</div>
       <div class="course-body">
+        <div class="test-badges">
+          <span class="badge-test badge-pre">📝 Pre-Test</span>
+          <span class="badge-test badge-post">✅ Post-Test</span>
+        </div>
         <span class="course-tag orange">Critical Thinking</span>
         <h3>การคิดเชิงวิเคราะห์ในสายสุขภาพ</h3>
         <p>ฝึกการคิดอย่างเป็นระบบ วิเคราะห์ข้อมูลและตัดสินใจทางคลินิก</p>
         <div class="course-meta">
-          <span>⏱ 5 ชม.</span>
-          <span>👩‍⚕️ ผศ.ดร.อรุณ</span>
+          <span class="clip-count">🎬 5 คลิป · 18–28 นาที/คลิป</span>
           <span class="badge-free">ฟรี</span>
         </div>
+        <div class="course-meta" style="margin-top:0.3rem">
+          <span>👩‍⚕️ ผศ.ดร.อรุณ</span>
+        </div>
+        <div class="go-btn">เริ่มเรียน →</div>
       </div>
     </div>
 
-    <div class="course-card" data-category="critical">
+    <div class="course-card" data-category="critical" onclick="location.href='course-detail.html?course=5'">
       <div class="course-thumb">🔬</div>
       <div class="course-body">
+        <div class="test-badges">
+          <span class="badge-test badge-pre">📝 Pre-Test</span>
+          <span class="badge-test badge-post">✅ Post-Test</span>
+        </div>
         <span class="course-tag">Critical Thinking</span>
         <h3>Evidence-Based Practice สำหรับนักศึกษา</h3>
         <p>เรียนรู้การนำหลักฐานทางวิทยาศาสตร์มาประยุกต์ใช้ในการตัดสินใจ</p>
         <div class="course-meta">
-          <span>⏱ 4 ชม.</span>
-          <span>👨‍⚕️ รศ.ดร.ธนวัฒน์</span>
+          <span class="clip-count">🎬 4 คลิป · 20–30 นาที/คลิป</span>
           <span class="badge-free">ฟรี</span>
         </div>
+        <div class="course-meta" style="margin-top:0.3rem">
+          <span>👨‍⚕️ รศ.ดร.ธนวัฒน์</span>
+        </div>
+        <div class="go-btn">เริ่มเรียน →</div>
       </div>
     </div>
 
   </div>
 </section>
 
+<!-- ===== Empathy & Stress ===== -->
 <section class="section section-alt">
   <div class="section-header" style="margin-bottom:1.5rem">
-    <div><div class="section-title" style="font-size:1.2rem">Empathy & Stress Management</div></div>
+    <div><div class="section-title" style="font-size:1.2rem">💙 Empathy & Stress Management</div></div>
   </div>
   <div class="courses-grid">
 
-    <div class="course-card" data-category="empathy">
+    <div class="course-card" data-category="empathy" onclick="location.href='course-detail.html?course=5'">
       <div class="course-thumb">💙</div>
       <div class="course-body">
+        <div class="test-badges">
+          <span class="badge-test badge-pre">📝 Pre-Test</span>
+          <span class="badge-test badge-post">✅ Post-Test</span>
+          <span class="badge-test badge-ai">🤖 AI Practice</span>
+        </div>
         <span class="course-tag">Empathy</span>
-        <h3>Empathy in Healthcare — ความเห็นอกเห็นใจทางการแพทย์</h3>
+        <h3>Empathy in Healthcare</h3>
         <p>เข้าใจและรับรู้ความรู้สึกผู้ป่วย เพื่อการดูแลที่ครบมิติ</p>
         <div class="course-meta">
-          <span>⏱ 3 ชม.</span>
-          <span>👩‍⚕️ ผศ.ดร.มณีรัตน์</span>
+          <span class="clip-count">🎬 4 คลิป · 15–25 นาที/คลิป</span>
           <span class="badge-free">ฟรี</span>
         </div>
+        <div class="course-meta" style="margin-top:0.3rem">
+          <span>👩‍⚕️ ผศ.ดร.มณีรัตน์</span>
+        </div>
+        <div class="go-btn">เริ่มเรียน →</div>
       </div>
     </div>
 
-    <div class="course-card" data-category="empathy">
+    <div class="course-card" data-category="empathy" onclick="location.href='course-detail.html?course=6'">
       <div class="course-thumb blue">🌸</div>
       <div class="course-body">
+        <div class="test-badges">
+          <span class="badge-test badge-pre">📝 Pre-Test</span>
+          <span class="badge-test badge-post">✅ Post-Test</span>
+        </div>
         <span class="course-tag blue">Empathy</span>
         <h3>Cultural Competency ในการดูแลผู้ป่วย</h3>
         <p>เรียนรู้การเคารพความหลากหลายทางวัฒนธรรมในการให้บริการสุขภาพ</p>
         <div class="course-meta">
-          <span>⏱ 3.5 ชม.</span>
-          <span>👨‍⚕️ อ.ดร.พรชัย</span>
+          <span class="clip-count">🎬 4 คลิป · 18–30 นาที/คลิป</span>
           <span class="badge-free">ฟรี</span>
         </div>
+        <div class="course-meta" style="margin-top:0.3rem">
+          <span>👨‍⚕️ อ.ดร.พรชัย</span>
+        </div>
+        <div class="go-btn">เริ่มเรียน →</div>
       </div>
     </div>
 
-    <div class="course-card" data-category="stress">
+    <div class="course-card" data-category="stress" onclick="location.href='course-detail.html?course=6'">
       <div class="course-thumb orange">🧘</div>
       <div class="course-body">
+        <div class="test-badges">
+          <span class="badge-test badge-pre">📝 Pre-Test</span>
+          <span class="badge-test badge-post">✅ Post-Test</span>
+          <span class="badge-test badge-ai">🤖 AI Practice</span>
+        </div>
         <span class="course-tag orange">Stress Management</span>
         <h3>Mindfulness สำหรับบุคลากรการแพทย์</h3>
         <p>เทคนิค Mindfulness เพื่อลดความเครียด ป้องกัน Burnout ในสายสุขภาพ</p>
         <div class="course-meta">
-          <span>⏱ 2 ชม.</span>
-          <span>👩‍⚕️ อ.สายใจ</span>
+          <span class="clip-count">🎬 3 คลิป · 15–20 นาที/คลิป</span>
           <span class="badge-free">ฟรี</span>
         </div>
+        <div class="course-meta" style="margin-top:0.3rem">
+          <span>👩‍⚕️ อ.สายใจ</span>
+        </div>
+        <div class="go-btn">เริ่มเรียน →</div>
       </div>
     </div>
 
-    <div class="course-card" data-category="stress">
+    <div class="course-card" data-category="stress" onclick="location.href='course-detail.html?course=6'">
       <div class="course-thumb">💪</div>
       <div class="course-body">
+        <div class="test-badges">
+          <span class="badge-test badge-pre">📝 Pre-Test</span>
+          <span class="badge-test badge-post">✅ Post-Test</span>
+        </div>
         <span class="course-tag">Stress Management</span>
         <h3>Resilience — สร้างความยืดหยุ่นทางจิตใจ</h3>
         <p>ฝึกความสามารถในการฟื้นฟูตัวเองหลังจากเผชิญกับเหตุการณ์ยากลำบาก</p>
         <div class="course-meta">
-          <span>⏱ 3 ชม.</span>
-          <span>👨‍⚕️ รศ.ดร.กิตติ</span>
+          <span class="clip-count">🎬 4 คลิป · 20–28 นาที/คลิป</span>
           <span class="badge-free">ฟรี</span>
         </div>
+        <div class="course-meta" style="margin-top:0.3rem">
+          <span>👨‍⚕️ รศ.ดร.กิตติ</span>
+        </div>
+        <div class="go-btn">เริ่มเรียน →</div>
       </div>
     </div>
 

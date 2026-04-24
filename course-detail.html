@@ -1,0 +1,588 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>คอร์สเรียน — KKU SkillBridge</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Sarabun:wght@400;600;700;800;900&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/style.css" />
+  <style>
+    .course-detail-layout {
+      display: grid;
+      grid-template-columns: 1fr 340px;
+      gap: 2rem;
+      padding: 2rem 2.5rem;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    .step-bar {
+      display: flex;
+      align-items: center;
+      gap: 0;
+      margin-bottom: 2rem;
+      background: white;
+      border-radius: var(--radius);
+      box-shadow: var(--shadow-sm);
+      border: 1px solid #edf2ef;
+      overflow: hidden;
+    }
+    .step-item {
+      flex: 1;
+      padding: 1rem;
+      text-align: center;
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: var(--grey-text);
+      border-right: 1px solid #edf2ef;
+      position: relative;
+      transition: var(--transition);
+    }
+    .step-item:last-child { border-right: none; }
+    .step-item.active { background: var(--green-pale); color: var(--green); }
+    .step-item.done { background: var(--green); color: white; }
+    .step-num {
+      width: 28px; height: 28px;
+      border-radius: 50%;
+      background: #e5ede9;
+      color: var(--grey-text);
+      font-size: 0.82rem;
+      font-weight: 800;
+      display: flex; align-items: center; justify-content: center;
+      margin: 0 auto 0.4rem;
+    }
+    .step-item.active .step-num { background: var(--green); color: white; }
+    .step-item.done .step-num { background: rgba(255,255,255,0.3); color: white; }
+
+    /* Video Player */
+    .video-container {
+      background: #000;
+      border-radius: var(--radius);
+      overflow: hidden;
+      aspect-ratio: 16/9;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      margin-bottom: 1.5rem;
+    }
+    .video-placeholder {
+      text-align: center; color: white;
+    }
+    .video-placeholder .play-btn {
+      width: 72px; height: 72px;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.15);
+      border: 3px solid rgba(255,255,255,0.5);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.8rem;
+      margin: 0 auto 1rem;
+      cursor: pointer;
+      transition: var(--transition);
+    }
+    .video-placeholder .play-btn:hover { background: rgba(255,255,255,0.25); transform: scale(1.05); }
+    .video-progress-bar {
+      height: 4px; background: rgba(255,255,255,0.2);
+      position: absolute; bottom: 0; left: 0; right: 0;
+    }
+    .video-progress-fill { height: 100%; background: var(--green); width: 0%; transition: width 0.5s; }
+    .video-controls {
+      position: absolute; bottom: 8px; left: 12px; right: 12px;
+      display: flex; align-items: center; gap: 0.75rem;
+      color: white; font-size: 0.8rem;
+    }
+
+    /* Playlist */
+    .playlist { display: flex; flex-direction: column; gap: 0.6rem; }
+    .playlist-item {
+      display: flex; gap: 0.85rem; align-items: center;
+      padding: 0.85rem;
+      border-radius: 10px;
+      border: 2px solid transparent;
+      cursor: pointer;
+      transition: var(--transition);
+      background: white;
+    }
+    .playlist-item:hover { background: var(--green-pale); border-color: var(--green); }
+    .playlist-item.active { background: var(--green-pale); border-color: var(--green); }
+    .playlist-item.locked { opacity: 0.5; cursor: not-allowed; }
+    .playlist-item.done { background: #f0faf4; }
+    .playlist-thumb {
+      width: 48px; height: 36px;
+      border-radius: 6px;
+      background: var(--dark);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1rem; flex-shrink: 0; color: white;
+    }
+    .playlist-info h4 { font-size: 0.88rem; font-weight: 700; margin-bottom: 0.15rem; }
+    .playlist-info p { font-size: 0.78rem; color: var(--grey-text); }
+    .playlist-status { margin-left: auto; font-size: 0.8rem; flex-shrink: 0; }
+
+    /* Panel sections */
+    .panel-box {
+      background: white;
+      border-radius: var(--radius);
+      box-shadow: var(--shadow-sm);
+      border: 1px solid #edf2ef;
+      overflow: hidden;
+    }
+    .panel-box-header {
+      padding: 1.2rem 1.5rem;
+      border-bottom: 1px solid #edf2ef;
+      font-weight: 700; font-size: 1rem;
+    }
+    .panel-box-body { padding: 1.5rem; }
+
+    /* Test styles */
+    .test-wrap { max-width: 680px; margin: 0 auto; }
+    .test-intro { text-align: center; padding: 2rem; }
+    .test-intro .big-icon { font-size: 4rem; margin-bottom: 1rem; }
+    .test-intro h2 { font-size: 1.5rem; font-weight: 800; margin-bottom: 0.5rem; }
+    .test-intro p { color: var(--grey-text); margin-bottom: 1.75rem; }
+    .test-meta { display: flex; gap: 1.5rem; justify-content: center; margin-bottom: 1.75rem; }
+    .test-meta-item { text-align: center; }
+    .test-meta-item .num { font-size: 1.5rem; font-weight: 900; color: var(--green); }
+    .test-meta-item .lbl { font-size: 0.8rem; color: var(--grey-text); }
+    .test-q-wrap { padding: 0.5rem 0; }
+    .test-q-num { font-size: 0.82rem; color: var(--grey-text); font-weight: 600; margin-bottom: 0.5rem; }
+    .test-question { font-size: 1.05rem; font-weight: 700; margin-bottom: 1.25rem; line-height: 1.5; }
+    .test-options { display: flex; flex-direction: column; gap: 0.65rem; }
+    .test-option {
+      padding: 0.9rem 1.2rem;
+      border: 2px solid #e5ede9;
+      border-radius: 10px;
+      cursor: pointer;
+      font-size: 0.92rem;
+      transition: var(--transition);
+      text-align: left;
+      background: white;
+      width: 100%;
+    }
+    .test-option:hover { border-color: var(--green); background: var(--green-pale); }
+    .test-option.selected { border-color: var(--green); background: var(--green-pale); color: var(--green); font-weight: 600; }
+    .test-option.correct { border-color: #22c55e; background: #f0fdf4; color: #16a34a; font-weight: 600; }
+    .test-option.wrong { border-color: #ef4444; background: #fef2f2; color: #dc2626; font-weight: 600; }
+    .test-nav { display: flex; justify-content: space-between; align-items: center; margin-top: 1.75rem; }
+    .test-progress-bar { height: 6px; background: #e5ede9; border-radius: 10px; overflow: hidden; margin-bottom: 1.5rem; }
+    .test-progress-fill { height: 100%; background: var(--green); border-radius: 10px; transition: width 0.4s; }
+    .score-card { text-align: center; padding: 1.5rem; }
+    .score-circle {
+      width: 120px; height: 120px;
+      border-radius: 50%;
+      border: 8px solid var(--green);
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: center;
+      margin: 0 auto 1.25rem;
+    }
+    .score-circle .score-num { font-size: 2rem; font-weight: 900; color: var(--green); line-height: 1; }
+    .score-circle .score-den { font-size: 0.85rem; color: var(--grey-text); }
+    .score-card h3 { font-size: 1.2rem; font-weight: 800; margin-bottom: 0.4rem; }
+    .score-card p { color: var(--grey-text); font-size: 0.9rem; margin-bottom: 1.5rem; }
+    .compare-box {
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 1rem; margin-top: 1.5rem; text-align: center;
+    }
+    .compare-item { padding: 1rem; border-radius: 12px; }
+    .compare-item.pre { background: var(--orange-light); }
+    .compare-item.post { background: var(--green-pale); }
+    .compare-item .label { font-size: 0.8rem; font-weight: 700; margin-bottom: 0.3rem; }
+    .compare-item .score { font-size: 1.8rem; font-weight: 900; }
+    .compare-item.pre .score { color: var(--orange); }
+    .compare-item.post .score { color: var(--green); }
+    .improvement { margin-top: 0.75rem; font-size: 1.1rem; font-weight: 800; color: var(--green); }
+
+    @media(max-width:900px) {
+      .course-detail-layout { grid-template-columns: 1fr; }
+    }
+    @media(max-width:640px) {
+      .course-detail-layout { padding: 1.25rem; }
+      .step-item { padding: 0.75rem 0.4rem; font-size: 0.72rem; }
+    }
+  </style>
+</head>
+<body>
+
+<nav class="navbar">
+  <a href="index.html" class="navbar-brand">
+    <div class="logo-icon">🌿</div>
+    KKU <span class="accent">Skill</span>Bridge
+  </a>
+  <div class="hamburger"><span></span><span></span><span></span></div>
+  <ul class="nav-links">
+    <li><a href="index.html">Home</a></li>
+    <li><a href="courses.html" class="active">Courses</a></li>
+    <li><a href="chatbot.html">AI Chatbot</a></li>
+    <li><a href="others.html">Others</a></li>
+  </ul>
+  <div class="nav-right">
+    <div style="position:relative">
+      <button class="btn-profile" id="profileBtn">👤</button>
+      <div class="dropdown-menu" id="dropdownMenu">
+        <a href="profile.html">👤 &nbsp;ข้อมูลบัญชี</a>
+        <a href="profile.html#courses">📚 &nbsp;คอร์สของฉัน</a>
+        <div class="divider"></div>
+        <a href="others.html">❓ &nbsp;Help Center</a>
+      </div>
+    </div>
+  </div>
+</nav>
+
+<!-- Step Bar -->
+<div style="padding:1.5rem 2.5rem 0;max-width:1200px;margin:0 auto">
+  <a href="courses.html" style="font-size:0.85rem;color:var(--grey-text);display:inline-flex;align-items:center;gap:0.4rem;margin-bottom:1rem">← กลับไปหน้าคอร์ส</a>
+  <h2 id="courseTitle" style="font-size:1.35rem;font-weight:800;margin-bottom:1.25rem">การสื่อสารกับผู้ป่วยและครอบครัว</h2>
+  <div class="step-bar" id="stepBar">
+    <div class="step-item active" id="step1">
+      <div class="step-num">1</div>Pre-Test
+    </div>
+    <div class="step-item" id="step2">
+      <div class="step-num">2</div>เรียนรู้
+    </div>
+    <div class="step-item" id="step3">
+      <div class="step-num">3</div>Post-Test
+    </div>
+    <div class="step-item" id="step4">
+      <div class="step-num">4</div>ผลลัพธ์
+    </div>
+  </div>
+</div>
+
+<!-- ===== MAIN CONTENT ===== -->
+<div id="appContent"></div>
+
+<script src="js/main.js"></script>
+<script>
+// ========== Course Data ==========
+const courseData = {
+  title: 'การสื่อสารกับผู้ป่วยและครอบครัว',
+  videos: [
+    { id:1, title:'ทำไมการสื่อสารถึงสำคัญ?', duration:'18 นาที', emoji:'💬', done:false },
+    { id:2, title:'Active Listening — การฟังเชิงรุก', duration:'22 นาที', emoji:'👂', done:false },
+    { id:3, title:'ภาษากายในการสื่อสารทางการแพทย์', duration:'15 นาที', emoji:'🤝', done:false },
+    { id:4, title:'การสื่อสารข่าวร้ายอย่างเป็นมืออาชีพ', duration:'28 นาที', emoji:'💙', done:false },
+    { id:5, title:'สรุปและฝึกปฏิบัติ', duration:'20 นาที', emoji:'✅', done:false },
+  ]
+};
+
+const preTestQ = [
+  { q:'การฟังเชิงรุก (Active Listening) หมายความว่าอะไร?', opts:['การฟังโดยไม่ขัด','การตั้งใจฟัง เข้าใจ และตอบสนองอย่างเหมาะสม','การจดบันทึกระหว่างฟัง','การฟังแล้วสรุปให้ผู้ป่วยทราบ'], a:1 },
+  { q:'ข้อใดเป็นอุปสรรคของการสื่อสารกับผู้ป่วย?', opts:['การใช้ภาษาง่าย','การสบตา','การใช้คำศัพท์ทางการแพทย์ที่ซับซ้อน','การนั่งในระดับเดียวกัน'], a:2 },
+  { q:'ควรเริ่มต้นการสื่อสารกับผู้ป่วยอย่างไร?', opts:['แนะนำตัวและอธิบายบทบาทของตน','เริ่มซักประวัติทันที','ถามอาการหลักทันที','เปิดแฟ้มผู้ป่วยก่อน'], a:0 },
+  { q:'การสื่อสารแบบ Non-verbal ครอบคลุมสิ่งใด?', opts:['เฉพาะภาษากาย','ท่าทาง การสบตา และน้ำเสียง','การเขียน','การพูดภาษาต่างประเทศ'], a:1 },
+  { q:'เมื่อผู้ป่วยร้องไห้ ควรทำอย่างไรก่อน?', opts:['ให้ข้อมูลทางการแพทย์ทันที','บอกให้หยุดร้องไห้','หยุดพูด นั่งเงียบ และแสดงความเห็นอกเห็นใจ','เรียกพยาบาลมาช่วย'], a:2 },
+];
+
+const postTestQ = [
+  { q:'หลังเรียนคอร์สนี้ Active Listening มีขั้นตอนกี่ขั้น?', opts:['2 ขั้น','3 ขั้น','4 ขั้น','5 ขั้น'], a:2 },
+  { q:'SPIKES Model ใช้สำหรับอะไร?', opts:['การรับผู้ป่วยใหม่','การสื่อสารข่าวร้าย','การทำ Handover','การเขียนรายงาน'], a:1 },
+  { q:'ข้อใดเป็นตัวอย่างคำถามปลายเปิดที่ดี?', opts:['"คุณปวดหัวไหม?"','"ตอนนี้รู้สึกอย่างไรบ้างครับ?"','"ทานยาครบไหม?"','"อาการดีขึ้นไหม?"'], a:1 },
+  { q:'ควรนั่งในระดับใดเมื่อคุยกับผู้ป่วยบนเตียง?', opts:['ยืน','นั่งสูงกว่า','ระดับเดียวกันหรือต่ำกว่าเล็กน้อย','นั่งห่างๆ'], a:2 },
+  { q:'การใช้ภาษาง่ายกับผู้ป่วยมีประโยชน์อย่างไร?', opts:['ลดเวลาสนทนา','เพิ่มความร่วมมือในการรักษา','ทำให้ดูเป็นมืออาชีพมากขึ้น','ลดภาระงานพยาบาล'], a:1 },
+];
+
+let currentStep = 1;
+let preScore = 0;
+let postScore = 0;
+let currentQ = 0;
+let answers = [];
+let currentVideo = 0;
+let videoDone = false;
+let testMode = 'pre';
+
+function setStep(n) {
+  currentStep = n;
+  [1,2,3,4].forEach(i => {
+    const el = document.getElementById('step'+i);
+    el.className = 'step-item' + (i < n ? ' done' : i === n ? ' active' : '');
+    el.querySelector('.step-num').textContent = i < n ? '✓' : i;
+  });
+}
+
+// ===== RENDER FUNCTIONS =====
+function render() {
+  const el = document.getElementById('appContent');
+  if (currentStep === 1) el.innerHTML = renderTestIntro('pre');
+  else if (currentStep === 1.5) el.innerHTML = renderTestQuiz('pre');
+  else if (currentStep === 1.9) el.innerHTML = renderTestScore('pre');
+  else if (currentStep === 2) el.innerHTML = renderLearn();
+  else if (currentStep === 3) el.innerHTML = renderTestIntro('post');
+  else if (currentStep === 3.5) el.innerHTML = renderTestQuiz('post');
+  else if (currentStep === 3.9) el.innerHTML = renderTestScore('post');
+  else if (currentStep === 4) el.innerHTML = renderResult();
+}
+
+function renderTestIntro(type) {
+  const isPre = type === 'pre';
+  return `<div style="padding:2rem 2.5rem;max-width:680px;margin:0 auto">
+    <div class="test-intro panel-box">
+      <div class="panel-box-body">
+        <div class="big-icon">${isPre ? '📝' : '🏆'}</div>
+        <h2>${isPre ? 'Pre-Test — วัดความรู้เบื้องต้น' : 'Post-Test — วัดผลหลังเรียน'}</h2>
+        <p>${isPre ? 'ทดสอบความรู้เดิมก่อนเรียน เพื่อวัดพัฒนาการหลังจบคอร์ส' : 'ทดสอบความรู้หลังเรียนจบ เพื่อเปรียบเทียบกับ Pre-Test'}</p>
+        <div class="test-meta">
+          <div class="test-meta-item"><div class="num">5</div><div class="lbl">ข้อ</div></div>
+          <div class="test-meta-item"><div class="num">~5</div><div class="lbl">นาที</div></div>
+          <div class="test-meta-item"><div class="num">ฟรี</div><div class="lbl">ไม่จำกัดครั้ง</div></div>
+        </div>
+        ${isPre ? '<p style="font-size:0.85rem;color:var(--grey-text);background:var(--blue-light);padding:0.85rem;border-radius:8px;margin-bottom:1.5rem">💡 ไม่ต้องกังวลถ้าตอบผิด! Pre-Test ใช้สำหรับวัดพัฒนาการเท่านั้น</p>' : '<p style="font-size:0.85rem;color:var(--grey-text);background:var(--green-pale);padding:0.85rem;border-radius:8px;margin-bottom:1.5rem">🎯 คุณเรียนจบแล้ว! ลองทำ Post-Test เพื่อดูว่าพัฒนาขึ้นแค่ไหน</p>'}
+        <button class="btn btn-green" style="width:100%;justify-content:center;font-size:1rem;padding:0.9rem" onclick="startTest('${type}')">เริ่มทำแบบทดสอบ →</button>
+      </div>
+    </div>
+  </div>`;
+}
+
+function startTest(type) {
+  testMode = type; currentQ = 0; answers = [];
+  currentStep = type === 'pre' ? 1.5 : 3.5;
+  render();
+}
+
+function renderTestQuiz(type) {
+  const qs = type === 'pre' ? preTestQ : postTestQ;
+  const q = qs[currentQ];
+  const pct = Math.round((currentQ / qs.length) * 100);
+  return `<div style="padding:2rem 2.5rem;max-width:680px;margin:0 auto">
+    <div class="panel-box">
+      <div class="panel-box-header">${type === 'pre' ? '📝 Pre-Test' : '🏆 Post-Test'} — ข้อ ${currentQ+1} จาก ${qs.length}</div>
+      <div class="panel-box-body">
+        <div class="test-progress-bar"><div class="test-progress-fill" style="width:${pct}%"></div></div>
+        <div class="test-q-wrap">
+          <p class="test-q-num">ข้อที่ ${currentQ+1}</p>
+          <p class="test-question">${q.q}</p>
+          <div class="test-options">
+            ${q.opts.map((o,i) => `<button class="test-option${answers[currentQ]===i?' selected':''}" onclick="selectTestAns(${i})">${String.fromCharCode(65+i)}. ${o}</button>`).join('')}
+          </div>
+        </div>
+        <div class="test-nav">
+          <button class="btn" style="background:var(--grey-bg);color:var(--dark)" onclick="prevTestQ()" ${currentQ===0?'disabled':''}>‹ ย้อนกลับ</button>
+          <button class="btn btn-green" onclick="nextTestQ('${type}')">${currentQ===qs.length-1?'ส่งคำตอบ ✓':'ถัดไป ›'}</button>
+        </div>
+      </div>
+    </div>
+  </div>`;
+}
+
+function selectTestAns(i) {
+  answers[currentQ] = i;
+  document.querySelectorAll('.test-option').forEach((el,idx) => el.classList.toggle('selected', idx===i));
+}
+
+function prevTestQ() {
+  if (currentQ > 0) { currentQ--; render(); }
+}
+
+function nextTestQ(type) {
+  if (answers[currentQ] === undefined) { alert('กรุณาเลือกคำตอบก่อน'); return; }
+  const qs = type === 'pre' ? preTestQ : postTestQ;
+  if (currentQ < qs.length-1) { currentQ++; render(); }
+  else {
+    const score = answers.filter((a,i) => a === qs[i].a).length;
+    if (type === 'pre') { preScore = score; currentStep = 1.9; }
+    else { postScore = score; currentStep = 3.9; }
+    render();
+  }
+}
+
+function renderTestScore(type) {
+  const isPre = type === 'pre';
+  const score = isPre ? preScore : postScore;
+  const total = 5;
+  const pct = Math.round((score/total)*100);
+  return `<div style="padding:2rem 2.5rem;max-width:680px;margin:0 auto">
+    <div class="panel-box">
+      <div class="panel-box-header">${isPre ? '📝 ผล Pre-Test' : '🏆 ผล Post-Test'}</div>
+      <div class="panel-box-body score-card">
+        <div class="score-circle">
+          <div class="score-num">${score}</div>
+          <div class="score-den">จาก ${total}</div>
+        </div>
+        <h3>${pct>=80?'ยอดเยี่ยม! 🏆':pct>=60?'ดีมาก! 👍':'ยังมีพื้นที่พัฒนา 📚'}</h3>
+        <p>${isPre ? 'นี่คือคะแนนก่อนเรียน ดูวิดีโอแล้วมาวัดอีกครั้งหลังจบ!' : `คุณพัฒนาขึ้นจาก Pre-Test ${preScore}/5 → Post-Test ${postScore}/5`}</p>
+        ${isPre
+          ? `<button class="btn btn-green" style="width:100%;justify-content:center;font-size:1rem;padding:0.9rem;margin-top:0.5rem" onclick="goLearn()">เริ่มเรียนเลย →</button>`
+          : `<button class="btn btn-green" style="width:100%;justify-content:center;font-size:1rem;padding:0.9rem;margin-top:0.5rem" onclick="goResult()">ดูผลสรุปรวม →</button>`
+        }
+      </div>
+    </div>
+  </div>`;
+}
+
+function goLearn() { setStep(2); currentStep = 2; render(); }
+function goResult() { setStep(4); currentStep = 4; render(); }
+
+function renderLearn() {
+  const v = courseData.videos[currentVideo];
+  const allDone = courseData.videos.every(x => x.done);
+  return `<div class="course-detail-layout">
+    <div>
+      <!-- Video Player -->
+      <div class="video-container" id="videoBox">
+        <div class="video-placeholder">
+          <div class="play-btn" onclick="playVideo()" id="playBtn">▶</div>
+          <div style="font-size:1.5rem;margin-bottom:0.4rem">${v.emoji}</div>
+          <div style="font-size:1rem;font-weight:700">${v.title}</div>
+          <div style="font-size:0.85rem;opacity:0.7;margin-top:0.3rem">⏱ ${v.duration}</div>
+        </div>
+        <div class="video-progress-bar"><div class="video-progress-fill" id="vidProgress"></div></div>
+      </div>
+
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:1.5rem;flex-wrap:wrap;gap:0.75rem">
+        <div>
+          <h3 style="font-size:1.1rem;font-weight:700;margin-bottom:0.25rem">${v.title}</h3>
+          <span style="font-size:0.83rem;color:var(--grey-text)">⏱ ${v.duration} &nbsp;·&nbsp; 📹 คลิปที่ ${currentVideo+1} จาก ${courseData.videos.length}</span>
+        </div>
+        <div style="display:flex;gap:0.5rem">
+          ${currentVideo>0?`<button class="btn" style="background:var(--grey-bg);color:var(--dark);padding:0.6rem 1rem" onclick="prevVideo()">‹ ก่อนหน้า</button>`:''}
+          ${currentVideo<courseData.videos.length-1
+            ? `<button class="btn btn-green" style="padding:0.6rem 1rem" onclick="nextVideo()">ถัดไป ›</button>`
+            : `<button class="btn btn-green" style="padding:0.6rem 1.25rem" onclick="goPostTest()" ${!allDone?'disabled title="ดูคลิปให้ครบก่อน"':''}>ไปทำ Post-Test →</button>`}
+        </div>
+      </div>
+
+      <!-- Course Notes -->
+      <div class="panel-box">
+        <div class="panel-box-header">📌 สรุปประเด็นสำคัญ</div>
+        <div class="panel-box-body">
+          <ul style="display:flex;flex-direction:column;gap:0.6rem;padding-left:1.25rem;list-style:disc;font-size:0.9rem;color:var(--grey-text)">
+            <li>การสื่อสารที่ดีช่วยเพิ่ม Patient Compliance ได้ถึง 40%</li>
+            <li>Active Listening = ฟัง + เข้าใจ + ตอบสนองอย่างเหมาะสม</li>
+            <li>ภาษากายคิดเป็น 55% ของการสื่อสารทั้งหมด</li>
+            <li>ใช้คำถามปลายเปิดเพื่อให้ผู้ป่วยเล่าความรู้สึก</li>
+            <li>SPIKES Model สำหรับการสื่อสารข่าวร้าย</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- Sidebar Playlist -->
+    <div>
+      <div class="panel-box" style="margin-bottom:1.25rem">
+        <div class="panel-box-header">📋 รายการคลิป</div>
+        <div class="panel-box-body" style="padding:0.75rem">
+          <div class="playlist">
+            ${courseData.videos.map((vid,i) => `
+              <div class="playlist-item${i===currentVideo?' active':''}${vid.done?' done':''}" onclick="selectVideo(${i})">
+                <div class="playlist-thumb">${vid.done?'✅':i===currentVideo?'▶':vid.emoji}</div>
+                <div class="playlist-info">
+                  <h4>${vid.title}</h4>
+                  <p>⏱ ${vid.duration}</p>
+                </div>
+                <div class="playlist-status">${vid.done?'<span style="color:var(--green)">✓</span>':i===currentVideo?'<span style="color:var(--orange)">▶</span>':''}</div>
+              </div>`).join('')}
+          </div>
+        </div>
+      </div>
+
+      <div class="panel-box">
+        <div class="panel-box-header">📊 ความคืบหน้า</div>
+        <div class="panel-box-body">
+          <div style="margin-bottom:0.75rem">
+            <div style="display:flex;justify-content:space-between;font-size:0.85rem;margin-bottom:0.4rem">
+              <span>คลิปที่ดูแล้ว</span>
+              <span style="font-weight:700">${courseData.videos.filter(v=>v.done).length} / ${courseData.videos.length}</span>
+            </div>
+            <div style="height:8px;background:#e5ede9;border-radius:10px;overflow:hidden">
+              <div style="height:100%;width:${Math.round(courseData.videos.filter(v=>v.done).length/courseData.videos.length*100)}%;background:var(--green);border-radius:10px;transition:width 0.4s"></div>
+            </div>
+          </div>
+          <div style="font-size:0.85rem;color:var(--grey-text)">Pre-Test: <strong style="color:var(--orange)">${preScore}/5 คะแนน</strong></div>
+          <div style="font-size:0.82rem;color:var(--grey-text);margin-top:0.3rem">ดูครบทุกคลิปแล้วทำ Post-Test ได้เลยครับ</div>
+        </div>
+      </div>
+    </div>
+  </div>`;
+}
+
+function playVideo() {
+  const btn = document.getElementById('playBtn');
+  const prog = document.getElementById('vidProgress');
+  if (!btn) return;
+  btn.textContent = '⏸';
+  btn.onclick = () => { btn.textContent = '▶'; btn.onclick = () => playVideo(); };
+  let w = 0;
+  const iv = setInterval(() => {
+    w += 2;
+    if (prog) prog.style.width = w + '%';
+    if (w >= 100) {
+      clearInterval(iv);
+      courseData.videos[currentVideo].done = true;
+      if (btn) btn.textContent = '↺';
+      render();
+    }
+  }, 80);
+}
+
+function selectVideo(i) { currentVideo = i; videoDone = false; render(); }
+function prevVideo() { if(currentVideo>0){ currentVideo--; render(); } }
+function nextVideo() { if(currentVideo<courseData.videos.length-1){ currentVideo++; render(); } }
+function goPostTest() { setStep(3); currentStep = 3; render(); }
+
+function renderResult() {
+  const improved = postScore - preScore;
+  return `<div style="padding:2rem 2.5rem;max-width:680px;margin:0 auto">
+    <div class="panel-box">
+      <div class="panel-box-header">🎉 สรุปผลการเรียน</div>
+      <div class="panel-box-body score-card">
+        <div style="font-size:4rem;margin-bottom:0.75rem">${improved>0?'🚀':improved===0?'✅':'📚'}</div>
+        <h3>${improved>0?'ยอดเยี่ยม! คุณพัฒนาขึ้นมาก!':improved===0?'ดีมาก! คุณรักษาระดับได้!':'ลองทบทวนและเรียนใหม่อีกครั้งนะครับ'}</h3>
+        <p>เปรียบเทียบคะแนนก่อนและหลังเรียนคอร์สนี้</p>
+        <div class="compare-box">
+          <div class="compare-item pre">
+            <div class="label">📝 Pre-Test</div>
+            <div class="score">${preScore}/5</div>
+            <div style="font-size:0.8rem;color:var(--orange)">${Math.round(preScore/5*100)}%</div>
+          </div>
+          <div class="compare-item post">
+            <div class="label">🏆 Post-Test</div>
+            <div class="score">${postScore}/5</div>
+            <div style="font-size:0.8rem;color:var(--green)">${Math.round(postScore/5*100)}%</div>
+          </div>
+        </div>
+        <div class="improvement">${improved>0?`↑ พัฒนาขึ้น +${improved} คะแนน`:improved===0?'→ คงที่':'↓ ลองทบทวนอีกครั้ง'}</div>
+        <div style="display:flex;gap:0.75rem;flex-wrap:wrap;justify-content:center;margin-top:1.75rem">
+          <a href="courses.html" class="btn btn-green">📚 เรียนคอร์สถัดไป</a>
+          <a href="chatbot.html" class="btn" style="background:var(--blue-light);color:#1a86aa">🤖 ฝึกต่อกับ AI</a>
+          <button class="btn" style="background:var(--grey-bg);color:var(--dark)" onclick="restartCourse()">↺ เรียนใหม่</button>
+        </div>
+      </div>
+    </div>
+  </div>`;
+}
+
+function restartCourse() {
+  courseData.videos.forEach(v => v.done = false);
+  currentVideo = 0; preScore = 0; postScore = 0;
+  currentQ = 0; answers = [];
+  setStep(1); currentStep = 1; render();
+}
+
+// Get course from URL param
+const params = new URLSearchParams(window.location.search);
+const courseId = params.get('course') || '1';
+const courseTitles = {
+  '1': 'การสื่อสารกับผู้ป่วยและครอบครัว',
+  '2': 'Active Listening — การฟังเชิงรุก',
+  '3': 'การทำงานเป็นทีมสหวิชาชีพ',
+  '4': 'การคิดเชิงวิเคราะห์ในสายสุขภาพ',
+  '5': 'Empathy in Healthcare',
+  '6': 'Mindfulness สำหรับบุคลากรการแพทย์',
+};
+document.getElementById('courseTitle').textContent = courseTitles[courseId] || courseData.title;
+
+window.selectTestAns = selectTestAns;
+window.nextTestQ = nextTestQ;
+window.prevTestQ = prevTestQ;
+window.startTest = startTest;
+window.goLearn = goLearn;
+window.goResult = goResult;
+window.goPostTest = goPostTest;
+window.playVideo = playVideo;
+window.selectVideo = selectVideo;
+window.prevVideo = prevVideo;
+window.nextVideo = nextVideo;
+window.restartCourse = restartCourse;
+
+render();
+</script>
+</body>
+</html>
