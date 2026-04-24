@@ -1,0 +1,722 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Clinical Simulator — KKU SkillBridge</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Sarabun:wght@400;600;700;800;900&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/style.css" />
+  <style>
+    body { background: #f4f6f4; }
+
+    /* ===== Scenario Select ===== */
+    .scenario-select-page {
+      max-width: 1100px; margin: 2rem auto; padding: 0 2rem;
+    }
+    .scenario-select-page h1 { font-size: 2rem; font-weight: 900; margin-bottom: 0.4rem; }
+    .scenario-select-page p { color: var(--grey-text); margin-bottom: 2rem; }
+    .scenario-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 1.25rem;
+    }
+    .scenario-card {
+      background: white;
+      border-radius: 16px;
+      border: 2px solid #e5ede9;
+      padding: 1.5rem;
+      cursor: pointer;
+      transition: var(--transition);
+      position: relative;
+      overflow: hidden;
+    }
+    .scenario-card::before {
+      content: '';
+      position: absolute; top: 0; left: 0; right: 0;
+      height: 4px;
+    }
+    .scenario-card.green::before  { background: var(--green); }
+    .scenario-card.blue::before   { background: var(--blue); }
+    .scenario-card.orange::before { background: var(--orange); }
+    .scenario-card.purple::before { background: #8b5cf6; }
+    .scenario-card:hover { transform: translateY(-5px); box-shadow: var(--shadow); border-color: var(--green); }
+    .scenario-patient {
+      display: flex; align-items: center; gap: 0.85rem; margin-bottom: 1rem;
+    }
+    .patient-avatar {
+      width: 52px; height: 52px; border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.6rem; flex-shrink: 0;
+    }
+    .patient-avatar.green  { background: var(--green-pale); }
+    .patient-avatar.blue   { background: var(--blue-light); }
+    .patient-avatar.orange { background: var(--orange-light); }
+    .patient-avatar.purple { background: #f3e8ff; }
+    .patient-info h3 { font-size: 1rem; font-weight: 800; margin-bottom: 0.15rem; }
+    .patient-info .sub { font-size: 0.8rem; color: var(--grey-text); }
+    .case-tag {
+      display: inline-block;
+      padding: 0.2rem 0.75rem; border-radius: 100px;
+      font-size: 0.72rem; font-weight: 700;
+      margin-bottom: 0.75rem;
+    }
+    .case-tag.green  { background: var(--green-pale); color: var(--green); }
+    .case-tag.blue   { background: var(--blue-light); color: #1a86aa; }
+    .case-tag.orange { background: var(--orange-light); color: var(--orange); }
+    .case-tag.purple { background: #f3e8ff; color: #7c3aed; }
+    .scenario-card p { font-size: 0.87rem; color: var(--grey-text); margin-bottom: 1rem; }
+    .skill-tags { display: flex; gap: 0.35rem; flex-wrap: wrap; }
+    .skill-tag {
+      font-size: 0.72rem; padding: 0.15rem 0.55rem;
+      border-radius: 100px; background: var(--grey-bg); color: var(--grey-text);
+      font-weight: 600;
+    }
+    .difficulty {
+      position: absolute; top: 1rem; right: 1rem;
+      font-size: 0.72rem; font-weight: 700;
+      padding: 0.2rem 0.65rem; border-radius: 100px;
+    }
+    .diff-easy   { background: #d1fae5; color: #065f46; }
+    .diff-medium { background: #fef3c7; color: #92400e; }
+    .diff-hard   { background: #fee2e2; color: #991b1b; }
+    .start-btn {
+      display: flex; align-items: center; justify-content: center; gap: 0.4rem;
+      width: 100%; padding: 0.7rem; border-radius: 10px;
+      background: var(--green); color: white;
+      border: none; font-family: inherit; font-size: 0.9rem;
+      font-weight: 700; cursor: pointer; margin-top: 1rem;
+      transition: var(--transition);
+    }
+    .start-btn:hover { background: var(--green-light); }
+
+    /* ===== Simulator Page ===== */
+    .sim-page {
+      display: none;
+      max-width: 1100px; margin: 1.5rem auto; padding: 0 2rem;
+    }
+    .sim-page.active { display: flex; gap: 1.5rem; align-items: flex-start; }
+    .sim-main { flex: 1; min-width: 0; }
+    .sim-sidebar { width: 300px; flex-shrink: 0; display: flex; flex-direction: column; gap: 1rem; }
+
+    /* Patient header */
+    .patient-header {
+      background: white; border-radius: 16px;
+      padding: 1rem 1.25rem;
+      display: flex; align-items: center; gap: 1rem;
+      box-shadow: var(--shadow-sm); border: 1px solid #edf2ef;
+      margin-bottom: 1rem; flex-wrap: wrap; gap: 0.75rem;
+    }
+    .patient-header .avatar {
+      width: 44px; height: 44px; border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.4rem; flex-shrink: 0;
+    }
+    .patient-header h3 { font-size: 1rem; font-weight: 800; margin-bottom: 0.15rem; }
+    .patient-header .xp-badge {
+      display: flex; align-items: center; gap: 0.4rem;
+      background: var(--green-pale); color: var(--green);
+      padding: 0.3rem 0.85rem; border-radius: 100px;
+      font-size: 0.82rem; font-weight: 700;
+      margin-left: auto;
+    }
+    .end-btn {
+      display: flex; align-items: center; gap: 0.4rem;
+      padding: 0.45rem 1rem; border-radius: 8px;
+      border: 1.5px solid #e5ede9; background: white;
+      font-size: 0.85rem; font-weight: 600; color: var(--grey-text);
+      cursor: pointer; transition: var(--transition); font-family: inherit;
+    }
+    .end-btn:hover { border-color: var(--orange); color: var(--orange); background: var(--orange-light); }
+
+    /* Chat box */
+    .sim-chat-box {
+      background: white; border-radius: 16px;
+      border: 1px solid #edf2ef; box-shadow: var(--shadow-sm);
+      height: 460px; overflow-y: auto;
+      padding: 1.25rem; display: flex; flex-direction: column; gap: 1rem;
+    }
+    .sim-msg { display: flex; gap: 0.75rem; max-width: 80%; }
+    .sim-msg.user { align-self: flex-end; flex-direction: row-reverse; }
+    .sim-avatar {
+      width: 36px; height: 36px; border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.1rem; flex-shrink: 0;
+    }
+    .sim-msg.patient .sim-avatar { background: #e5ede9; }
+    .sim-msg.user .sim-avatar { background: var(--green-pale); overflow:hidden; }
+    .sim-msg.user .sim-avatar img { width:100%;height:100%;object-fit:cover;object-position:top;border-radius:50%; }
+    .sim-bubble {
+      padding: 0.85rem 1.1rem;
+      border-radius: 16px;
+      font-size: 0.92rem; line-height: 1.65;
+    }
+    .sim-msg.patient .sim-bubble {
+      background: #f0f7f2;
+      border-bottom-left-radius: 4px;
+      color: var(--dark);
+    }
+    .sim-msg.user .sim-bubble {
+      background: var(--green);
+      color: white;
+      border-bottom-right-radius: 4px;
+    }
+    .sim-time { font-size: 0.7rem; color: var(--grey-text); margin-top: 0.25rem; }
+    .sim-msg.user .sim-time { text-align: right; }
+
+    /* Input */
+    .sim-input-wrap {
+      display: flex; gap: 0.75rem; margin-top: 0.85rem; align-items: flex-end;
+    }
+    .sim-input {
+      flex: 1; border: 2px solid #e5ede9; border-radius: 14px;
+      padding: 0.85rem 1.1rem; font-size: 0.93rem;
+      font-family: inherit; resize: none; outline: none;
+      transition: var(--transition); min-height: 52px; max-height: 120px;
+      background: white;
+    }
+    .sim-input:focus { border-color: var(--green); }
+    .sim-send {
+      width: 48px; height: 48px; border-radius: 14px;
+      background: var(--green); color: white; border: none;
+      cursor: pointer; font-size: 1.1rem;
+      display: flex; align-items: center; justify-content: center;
+      transition: var(--transition); flex-shrink: 0;
+    }
+    .sim-send:hover { background: var(--green-light); transform: scale(1.05); }
+
+    /* Sidebar cards */
+    .sim-card {
+      background: white; border-radius: 16px;
+      border: 1px solid #edf2ef; box-shadow: var(--shadow-sm);
+      padding: 1.25rem;
+    }
+    .sim-card h4 {
+      font-size: 0.88rem; font-weight: 700;
+      display: flex; align-items: center; gap: 0.5rem;
+      margin-bottom: 1rem; color: var(--dark);
+    }
+    .info-row { display: flex; gap: 0.5rem; margin-bottom: 0.6rem; font-size: 0.87rem; }
+    .info-label { font-weight: 700; color: var(--dark); min-width: 60px; flex-shrink: 0; }
+    .info-val { color: var(--grey-text); }
+    .skill-focus-list { display: flex; flex-direction: column; gap: 0.4rem; }
+    .skill-focus-item {
+      display: flex; align-items: center; gap: 0.5rem;
+      font-size: 0.85rem; padding: 0.45rem 0.65rem;
+      background: var(--green-pale); border-radius: 8px; color: var(--green); font-weight: 600;
+    }
+    .hint-list { display: flex; flex-direction: column; gap: 0.4rem; }
+    .hint-item {
+      font-size: 0.82rem; color: var(--grey-text);
+      padding: 0.35rem 0; border-bottom: 1px solid #f0f4f2;
+      display: flex; gap: 0.4rem;
+    }
+
+    /* Feedback Modal */
+    .feedback-modal {
+      display: none; position: fixed; inset: 0;
+      background: rgba(0,0,0,0.5); z-index: 5000;
+      align-items: center; justify-content: center;
+      backdrop-filter: blur(4px);
+    }
+    .feedback-modal.open { display: flex; }
+    .feedback-box {
+      background: white; border-radius: 20px;
+      padding: 2.25rem; max-width: 580px; width: 90%;
+      max-height: 85vh; overflow-y: auto;
+      box-shadow: 0 24px 64px rgba(0,0,0,0.2);
+    }
+    .feedback-box h2 { font-size: 1.4rem; font-weight: 900; margin-bottom: 0.3rem; }
+    .feedback-box .sub { font-size: 0.88rem; color: var(--grey-text); margin-bottom: 1.5rem; }
+    .score-row {
+      display: flex; gap: 1rem; margin-bottom: 1.5rem;
+    }
+    .score-item {
+      flex: 1; text-align: center; padding: 1rem;
+      border-radius: 12px; background: var(--grey-bg);
+    }
+    .score-item .num { font-size: 1.75rem; font-weight: 900; color: var(--green); }
+    .score-item .lbl { font-size: 0.78rem; color: var(--grey-text); margin-top: 0.15rem; }
+    .feedback-section { margin-bottom: 1.25rem; }
+    .feedback-section h4 { font-size: 0.92rem; font-weight: 700; margin-bottom: 0.6rem; }
+    .feedback-point {
+      display: flex; gap: 0.65rem; align-items: flex-start;
+      font-size: 0.87rem; color: var(--grey-text);
+      padding: 0.5rem 0; border-bottom: 1px solid #f0f4f2;
+    }
+    .feedback-point:last-child { border-bottom: none; }
+    .fp-icon { flex-shrink: 0; font-size: 1rem; }
+    .skill-score-bar { margin-bottom: 0.85rem; }
+    .skill-score-bar .label { display: flex; justify-content: space-between; font-size: 0.83rem; margin-bottom: 0.3rem; font-weight: 600; }
+    .bar-track { height: 8px; background: #e5ede9; border-radius: 10px; overflow: hidden; }
+    .bar-fill { height: 100%; border-radius: 10px; background: var(--green); transition: width 0.8s ease; }
+
+    @media(max-width:800px) {
+      .sim-page.active { flex-direction: column; }
+      .sim-sidebar { width: 100%; }
+      .scenario-grid { grid-template-columns: 1fr; }
+      .sim-page, .scenario-select-page { padding: 0 1rem; }
+    }
+  </style>
+</head>
+<body>
+
+<nav class="navbar">
+  <a href="index.html" class="navbar-brand">
+    <img src="assets/KKU-logo.png" alt="KKU" class="logo-img" onerror="this.outerHTML='<div class=\'logo-icon\'>🌿</div>'" />
+    KKU <span class="accent">Skill</span>Bridge
+  </a>
+  <div class="hamburger"><span></span><span></span><span></span></div>
+  <ul class="nav-links">
+    <li><a href="index.html">Home</a></li>
+    <li><a href="courses.html">Courses</a></li>
+    <li><a href="chatbot.html">AI Chatbot</a></li>
+    <li><a href="simulator.html" class="active">Simulator</a></li>
+    <li><a href="community.html">Community</a></li>
+    <li><a href="others.html">Others</a></li>
+  </ul>
+  <div class="nav-right" style="display:flex;align-items:center;gap:0.75rem">
+    <div style="background:var(--green-pale);color:var(--green);padding:0.3rem 0.85rem;border-radius:100px;font-size:0.82rem;font-weight:700" id="xpBadge">⭐ 0 XP</div>
+    <div style="position:relative">
+      <button class="btn-profile" id="profileBtn">
+        <img src="assets/avatar.png" alt="Profile" onerror="this.outerHTML='👤'" />
+      </button>
+      <div class="dropdown-menu" id="dropdownMenu">
+        <a href="profile.html">👤 &nbsp;ข้อมูลบัญชี</a>
+        <a href="profile.html#courses">📚 &nbsp;คอร์สของฉัน</a>
+        <a href="profile.html#roadmap">🗺 &nbsp;Roadmap ของฉัน</a>
+        <div class="divider"></div>
+        <a href="others.html">❓ &nbsp;Help Center</a>
+      </div>
+    </div>
+  </div>
+</nav>
+
+<!-- ===== SCENARIO SELECT ===== -->
+<div class="scenario-select-page" id="scenarioSelect">
+  <h1>🏥 Clinical Simulator</h1>
+  <p>ฝึกการสื่อสารกับผู้ป่วยจำลองในสถานการณ์จริง — AI จะตอบสนองตามบุคลิกผู้ป่วยแต่ละราย</p>
+
+  <div class="scenario-grid">
+
+    <div class="scenario-card green" onclick="startScenario('somchai')">
+      <span class="difficulty diff-easy">ง่าย</span>
+      <div class="scenario-patient">
+        <div class="patient-avatar green">👴</div>
+        <div class="patient-info">
+          <h3>คุณสมชาย วงศ์ดี</h3>
+          <p class="sub">ชาย อายุ 68 ปี</p>
+        </div>
+      </div>
+      <span class="case-tag green">HEART VALVE CONSULTATION</span>
+      <p>ผู้ป่วยสูงอายุที่วิตกกังวลเรื่องการผ่าตัดลิ้นหัวใจ ไม่เข้าใจขั้นตอนและกลัวความเสี่ยง ต้องการการอธิบายที่เข้าใจง่าย</p>
+      <div class="skill-tags">
+        <span class="skill-tag">Professional Empathy</span>
+        <span class="skill-tag">Clarity</span>
+        <span class="skill-tag">Active Listening</span>
+      </div>
+      <button class="start-btn">▶ เริ่ม Simulation</button>
+    </div>
+
+    <div class="scenario-card blue" onclick="startScenario('napa')">
+      <span class="difficulty diff-medium">ปานกลาง</span>
+      <div class="scenario-patient">
+        <div class="patient-avatar blue">👩</div>
+        <div class="patient-info">
+          <h3>คุณนภา ใจดี</h3>
+          <p class="sub">หญิง อายุ 45 ปี</p>
+        </div>
+      </div>
+      <span class="case-tag blue">MEDICATION REFUSAL</span>
+      <p>ผู้ป่วยเบาหวานที่ปฏิเสธไม่ยอมทานยา เชื่อว่าสมุนไพรรักษาได้ และกังวลเรื่องผลข้างเคียงของยา</p>
+      <div class="skill-tags">
+        <span class="skill-tag">Motivational Interviewing</span>
+        <span class="skill-tag">Empathy</span>
+        <span class="skill-tag">Negotiation</span>
+      </div>
+      <button class="start-btn">▶ เริ่ม Simulation</button>
+    </div>
+
+    <div class="scenario-card orange" onclick="startScenario('family')">
+      <span class="difficulty diff-medium">ปานกลาง</span>
+      <div class="scenario-patient">
+        <div class="patient-avatar orange">👨</div>
+        <div class="patient-info">
+          <h3>คุณวิชัย (ญาติผู้ป่วย)</h3>
+          <p class="sub">ลูกชาย อายุ 42 ปี</p>
+        </div>
+      </div>
+      <span class="case-tag orange">FAMILY COMMUNICATION</span>
+      <p>ลูกชายที่กังวลและโกรธเรื่องอาการของแม่ที่อยู่ ICU ต้องการข้อมูลอย่างเร่งด่วน และรู้สึกว่าถูกปล่อยปละละเลย</p>
+      <div class="skill-tags">
+        <span class="skill-tag">De-escalation</span>
+        <span class="skill-tag">Empathy</span>
+        <span class="skill-tag">Clear Communication</span>
+      </div>
+      <button class="start-btn">▶ เริ่ม Simulation</button>
+    </div>
+
+    <div class="scenario-card purple" onclick="startScenario('mali')">
+      <span class="difficulty diff-hard">ยาก</span>
+      <div class="scenario-patient">
+        <div class="patient-avatar purple">👩</div>
+        <div class="patient-info">
+          <h3>คุณมาลี รักสุข</h3>
+          <p class="sub">หญิง อายุ 52 ปี</p>
+        </div>
+      </div>
+      <span class="case-tag purple">MENTAL HEALTH SUPPORT</span>
+      <p>ผู้ป่วยโรคมะเร็งระยะ 2 ที่เริ่มมีภาวะซึมเศร้า รู้สึกสิ้นหวัง ไม่อยากรักษาต่อ และต้องการคนรับฟัง</p>
+      <div class="skill-tags">
+        <span class="skill-tag">Deep Empathy</span>
+        <span class="skill-tag">Crisis Support</span>
+        <span class="skill-tag">Active Listening</span>
+      </div>
+      <button class="start-btn">▶ เริ่ม Simulation</button>
+    </div>
+
+  </div>
+</div>
+
+<!-- ===== SIMULATOR ===== -->
+<div class="sim-page" id="simPage">
+
+  <!-- Main Chat -->
+  <div class="sim-main">
+    <!-- Patient Header -->
+    <div class="patient-header">
+      <div class="avatar" id="simAvatar">👴</div>
+      <div>
+        <h3 id="simPatientName">คุณสมชาย วงศ์ดี</h3>
+        <div id="simCaseTag" style="display:inline-block;margin-top:0.2rem"></div>
+      </div>
+      <div class="xp-badge" id="simXP">⭐ 0 XP</div>
+      <button class="end-btn" onclick="endSession()">✦ End &amp; Feedback</button>
+    </div>
+
+    <!-- Chat -->
+    <div class="sim-chat-box" id="simChat"></div>
+
+    <!-- Input -->
+    <div class="sim-input-wrap">
+      <textarea class="sim-input" id="simInput" rows="1" placeholder="พิมพ์คำตอบในฐานะบุคลากรทางการแพทย์... (Enter เพื่อส่ง)"></textarea>
+      <button class="sim-send" onclick="simSend()">➤</button>
+    </div>
+    <p style="font-size:0.78rem;color:var(--grey-text);margin-top:0.5rem;text-align:center">💡 Shift+Enter = ขึ้นบรรทัดใหม่ | ตอบสนองด้วยความเห็นอกเห็นใจและเป็นมืออาชีพ</p>
+  </div>
+
+  <!-- Sidebar -->
+  <div class="sim-sidebar">
+    <!-- Scenario Context -->
+    <div class="sim-card">
+      <h4>ℹ️ Scenario Context</h4>
+      <div class="info-row"><span class="info-label">ผู้ป่วย:</span><span class="info-val" id="ctxName">—</span></div>
+      <div class="info-row"><span class="info-label">Case:</span><span class="info-val" id="ctxCase">—</span></div>
+      <div class="info-row"><span class="info-label">เป้าหมาย:</span><span class="info-val" id="ctxGoal">—</span></div>
+      <div class="info-row"><span class="info-label">พื้นหลัง:</span><span class="info-val" id="ctxBg">—</span></div>
+    </div>
+
+    <!-- Soft Skill Focus -->
+    <div class="sim-card">
+      <h4>🎯 Soft Skill Focus</h4>
+      <div class="skill-focus-list" id="ctxSkills"></div>
+    </div>
+
+    <!-- Tips -->
+    <div class="sim-card">
+      <h4>💡 เทคนิคที่ควรใช้</h4>
+      <div class="hint-list" id="ctxHints"></div>
+    </div>
+
+    <!-- Back -->
+    <button onclick="backToSelect()" style="display:flex;align-items:center;gap:0.5rem;background:white;border:2px solid #e5ede9;border-radius:10px;padding:0.7rem 1rem;font-family:inherit;font-size:0.88rem;font-weight:600;color:var(--grey-text);cursor:pointer;width:100%;justify-content:center;transition:var(--transition)" onmouseover="this.style.borderColor='var(--green)';this.style.color='var(--green)'" onmouseout="this.style.borderColor='#e5ede9';this.style.color='var(--grey-text)'">
+      ← เลือก Scenario อื่น
+    </button>
+  </div>
+</div>
+
+<!-- ===== FEEDBACK MODAL ===== -->
+<div class="feedback-modal" id="feedbackModal">
+  <div class="feedback-box">
+    <h2>📊 ผลการ Simulation</h2>
+    <p class="sub" id="fbPatientName">คุณสมชาย — Heart Valve Consultation</p>
+
+    <div class="score-row">
+      <div class="score-item">
+        <div class="num" id="fbScore">85</div>
+        <div class="lbl">คะแนนรวม</div>
+      </div>
+      <div class="score-item">
+        <div class="num" id="fbTurns">—</div>
+        <div class="lbl">รอบสนทนา</div>
+      </div>
+      <div class="score-item">
+        <div class="num" style="color:var(--green)" id="fbXP">+50</div>
+        <div class="lbl">XP ที่ได้รับ</div>
+      </div>
+    </div>
+
+    <!-- Skill Scores -->
+    <div class="feedback-section">
+      <h4>📈 คะแนนแต่ละ Soft Skill</h4>
+      <div id="fbSkillBars"></div>
+    </div>
+
+    <!-- Strengths -->
+    <div class="feedback-section">
+      <h4>✅ จุดเด่น</h4>
+      <div id="fbStrengths"></div>
+    </div>
+
+    <!-- Improve -->
+    <div class="feedback-section">
+      <h4>🔧 ควรพัฒนา</h4>
+      <div id="fbImprove"></div>
+    </div>
+
+    <div style="display:flex;gap:0.75rem;flex-wrap:wrap;margin-top:0.5rem">
+      <button class="btn btn-green" onclick="closeFeedback()">▶ ลอง Scenario อื่น</button>
+      <a href="chatbot.html" class="btn" style="background:var(--blue-light);color:#1a86aa">🤖 ฝึกต่อกับ AI</a>
+    </div>
+  </div>
+</div>
+
+<script src="js/main.js"></script>
+<script>
+// ===== Scenario Data =====
+const scenarios = {
+  somchai: {
+    name: 'คุณสมชาย วงศ์ดี', emoji: '👴', color: 'green',
+    caseTag: 'HEART VALVE CONSULTATION', caseColor: 'green',
+    case: 'Heart Valve Consultation',
+    goal: 'อธิบายการผ่าตัดลิ้นหัวใจให้ผู้ป่วยสูงอายุที่กังวล พร้อมตอบข้อสงสัยด้วยความเห็นอกเห็นใจ',
+    bg: 'ผู้ป่วยสูงอายุ ไม่ค่อยเข้าใจคำทางการแพทย์ มีโรคประจำตัว DM, HT กังวลเรื่องการดมยาสลบและการฟื้นตัว',
+    skills: ['Professional Empathy', 'Clarity & Conciseness', 'Active Listening'],
+    hints: ['ใช้ภาษาง่าย หลีกเลี่ยงคำศัพท์ทางการแพทย์', 'รับฟังความกังวลก่อนให้ข้อมูล', 'ถามว่าเข้าใจหรือมีคำถามไหมหลังอธิบาย', 'แสดงความเข้าใจในความกลัวของผู้ป่วย'],
+    opener: 'สวัสดีครับ... คุณหมอ... ผมยังไม่ค่อยเข้าใจเลยนะครับ เรื่องลิ้นหัวใจนี่... มันต้องผ่าตัดจริงๆ เหรอ? ผมกลัวมากเลยครับ',
+    responses: [
+      { keys: ['กลัว','ใจเย็น','ไม่ต้องกลัว','เข้าใจ','รับฟัง'], reply: 'ขอบคุณที่รับฟังนะครับ... แต่ผมยังกังวลอยู่เรื่องการดมยาสลบ ได้ยินว่ามีความเสี่ยงสูงสำหรับคนสูงอายุ จริงไหมครับ?' },
+      { keys: ['ดมยา','ยาสลบ','ความเสี่ยง','วิสัญญี','อธิบาย'], reply: 'อ๋อ... แบบนั้นเองครับ ขอบคุณที่อธิบาย แต่ว่า... หลังผ่าตัดแล้ว ผมจะฟื้นตัวได้เร็วแค่ไหนครับ? ผมยังอยากดูแลสวนที่บ้านอยู่นะ' },
+      { keys: ['ฟื้นตัว','พักฟื้น','กลับบ้าน','ดูแล'], reply: 'โอ้โห นานขนาดนั้นเลยเหรอครับ... แต่ก็โอเคครับ ถ้ามันทำให้หายได้ก็คุ้ม แล้วค่าใช้จ่ายล่ะครับ? ผมกังวลเรื่องเงินอยู่นิดหน่อย' },
+      { keys: ['เงิน','ค่าใช้จ่าย','ประกัน','สิทธิ์','ค่ารักษา'], reply: 'ดีใจมากเลยครับ ที่มีสิทธิ์ช่วย... ขอบคุณที่อธิบายทุกอย่างนะครับคุณหมอ ผมรู้สึกดีขึ้นมากเลย แต่ขอคิดคุยกับลูกก่อนได้ไหมครับ?' },
+      { keys: ['ลูก','ครอบครัว','ญาติ','คิด','ตัดสิน'], reply: 'ได้ครับ ขอบคุณมากนะครับ คุณหมอพูดให้กำลังใจผมมากเลย ผมจะลองคุยกับลูกและรีบตัดสินใจนะครับ' },
+    ],
+    defaultReply: 'ขอบคุณนะครับคุณหมอ... แต่ผมยังมีคำถามอีกนิดนึงครับ เรื่องหลังผ่าตัดต้องปฏิบัติตัวอย่างไรบ้างครับ?',
+  },
+  napa: {
+    name: 'คุณนภา ใจดี', emoji: '👩', color: 'blue',
+    caseTag: 'MEDICATION REFUSAL', caseColor: 'blue',
+    case: 'Medication Refusal — Diabetes',
+    goal: 'โน้มน้าวให้ผู้ป่วยยอมรับการรักษาด้วยยา โดยเคารพความเชื่อและให้ข้อมูลที่ถูกต้อง',
+    bg: 'ผู้ป่วยเบาหวาน HbA1c 9.5% หยุดยาเองมา 3 เดือน หันมาดื่มสมุนไพร เชื่อว่ายาทำให้ไตเสีย',
+    skills: ['Motivational Interviewing', 'Non-judgmental Communication', 'Health Education'],
+    hints: ['อย่าตัดสินหรือดุความเชื่อผู้ป่วย', 'ถามว่าทำไมถึงเลือกสมุนไพร (เหตุผลเบื้องหลัง)', 'ใช้หลัก "ฟัง-ยอมรับ-สะท้อน-วางแผน"', 'เสนอทางเลือกที่เป็นไปได้ร่วมกัน'],
+    opener: 'หนูไม่ยอมกินยานะคะ หนูกลัวว่ายาจะทำให้ไตเสีย เพื่อนบอกว่าสมุนไพรดีกว่า ปลอดภัยกว่า หนูกินมา 3 เดือนแล้วรู้สึกดีด้วยนะคะ',
+    responses: [
+      { keys: ['เข้าใจ','รับฟัง','ห่วง','กังวล','ไม่ตัดสิน'], reply: 'อ๋อ คุณหมอไม่ว่าหนูหรอนะคะ? ก็ดีนะคะ... แต่หนูก็ยังกลัวอยู่นะคะ เพราะอา หนูกินยาแล้วไตวายค่ะ' },
+      { keys: ['ไต','ยา','ผลข้างเคียง','อธิบาย','ความเสี่ยง','ข้อมูล'], reply: 'ถ้าแบบนั้น... แต่สมุนไพรที่หนูกินอยู่มันไม่เป็นไรเหรอคะ? คนขายบอกว่าปลอดภัย 100% ค่ะ' },
+      { keys: ['สมุนไพร','หลักฐาน','วิจัย','ทดสอบ','ข้อมูล'], reply: 'โอ้... หนูไม่รู้เลยนะคะว่าแบบนั้น แล้วถ้าหนูจะลองกลับมากินยา แต่ยังกังวลอยู่ล่ะคะ ทำได้ไหมคะ?' },
+      { keys: ['ลอง','เริ่ม','ค่อยๆ','ติดตาม','ตรวจ'], reply: 'งั้นหนูขอลองดูนะคะ แต่ถ้ามีอาการแปลกๆ หนูโทรมาหาคุณหมอได้เลยใช่ไหมคะ?' },
+      { keys: ['โทร','ติดต่อ','มาหา','นัด','ฉุกเฉิน'], reply: 'ขอบคุณมากเลยนะคะคุณหมอ หนูรู้สึกดีขึ้นมากค่ะ คิดว่าจะลองกลับมากินยาดูค่ะ ขอบคุณที่รับฟังนะคะ' },
+    ],
+    defaultReply: 'แต่หนูก็ยังไม่แน่ใจนะคะ... คุณหมอมีหลักฐานว่ายาปลอดภัยไหมคะ?',
+  },
+  family: {
+    name: 'คุณวิชัย (ลูกชายผู้ป่วย)', emoji: '😤', color: 'orange',
+    caseTag: 'FAMILY COMMUNICATION', caseColor: 'orange',
+    case: 'Angry Family Member — ICU',
+    goal: 'ลดความตึงเครียดของญาติ ให้ข้อมูลอย่างครบถ้วน และสร้างความไว้วางใจ',
+    bg: 'แม่ของผู้ป่วยอยู่ใน ICU หลังผ่าตัดฉุกเฉิน ลูกชายรอมา 6 ชั่วโมง ไม่มีใครอัปเดต รู้สึกโกรธและกังวลมาก',
+    skills: ['De-escalation', 'Empathetic Listening', 'Transparent Communication'],
+    hints: ['อย่าตอบโต้ความโกรธด้วยความโกรธ', 'ยอมรับว่าเขารอนาน และมีสิทธิ์รู้สึกแบบนั้น', 'ให้ข้อมูลที่ชัดเจนและซื่อสัตย์', 'เสนอที่นั่งและน้ำ — แสดงความใส่ใจ'],
+    opener: 'แม่ผมอยู่ใน ICU มา 6 ชั่วโมงแล้ว! ไม่มีใครมาบอกผมเลยว่าเกิดอะไรขึ้น! ผมต้องรู้ตอนนี้เลย! ทำไมถึงปล่อยให้ผมรออย่างนี้!',
+    responses: [
+      { keys: ['ขอโทษ','เข้าใจ','รอนาน','กังวล','รับฟัง'], reply: 'โอเค... ผมรู้ว่าคุณหมอคงยุ่งนะ แต่แม่ผมเป็นยังไงบ้าง? อาการดีขึ้นไหม? ผมกลัวมากเลย' },
+      { keys: ['แม่','อาการ','ผ่าตัด','ICU','stable'], reply: 'Stable... นั่นแปลว่าอะไรครับ? อธิบายให้ผมเข้าใจได้ไหม? ผมไม่ใช่คนทางการแพทย์ครับ' },
+      { keys: ['อธิบาย','แปลว่า','หมายความ','ภาษา'], reply: 'อ๋อ... โอเค ผมเข้าใจแล้วครับ แล้วผมจะเข้าเยี่ยมได้เมื่อไหร่ครับ? ผมอยากเห็นแม่' },
+      { keys: ['เยี่ยม','เข้าไป','พบ','เวลา','กี่โมง'], reply: 'ได้ครับ ขอบคุณนะครับ... ผมขอโทษที่พูดจาไม่ดีด้วยนะครับ ผมแค่กังวลมากเลย' },
+      { keys: ['ไม่เป็นไร','เข้าใจ','ห่วง','รักแม่'], reply: 'ขอบคุณมากครับ คุณหมอใจดีมากเลย ผมจะรอเยี่ยมแม่ตามเวลาที่บอกนะครับ' },
+    ],
+    defaultReply: 'แล้วมีอะไรที่ผมต้องเตรียมหรือทำอะไรเพิ่มเติมไหมครับ?',
+  },
+  mali: {
+    name: 'คุณมาลี รักสุข', emoji: '😔', color: 'purple',
+    caseTag: 'MENTAL HEALTH SUPPORT', caseColor: 'purple',
+    case: 'Depression — Cancer Patient',
+    goal: 'รับฟังด้วยความเห็นอกเห็นใจ ประเมินความเสี่ยง และให้กำลังใจอย่างเหมาะสม',
+    bg: 'ผู้ป่วยมะเร็งเต้านม Stage 2 รักษามา 8 เดือน เริ่มมีอาการซึมเศร้า ไม่อยากสู้ต่อ นอนไม่หลับ กินข้าวไม่ได้',
+    skills: ['Deep Empathy', 'Suicide Risk Assessment', 'Hope Instillation'],
+    hints: ['ฟังก่อน อย่าพยายามแก้ปัญหาทันที', 'อย่าพูดว่า "คุณต้องสู้นะ" — มันกดดัน', 'ถามตรงๆ เรื่อง Self-harm หากสงสัย', 'ช่วยหาความหมายและสิ่งที่ยังมีคุณค่า'],
+    opener: 'หนูไม่อยากสู้ต่อแล้วนะคะ... มันเหนื่อยมากเลย เคมีบำบัดแต่ละครั้งมันทรมานมาก หนูไม่รู้ว่ายังคุ้มอยู่ไหมที่จะทนต่อ',
+    responses: [
+      { keys: ['รับฟัง','เข้าใจ','เหนื่อย','ยากมาก','ไม่ตัดสิน'], reply: 'ขอบคุณที่รับฟังนะคะ... ไม่ค่อยมีใครฟังหนูแบบนี้เลย หนูรู้สึกโดดเดี่ยวมากเลยค่ะ ลูกๆ ก็ยุ่ง ไม่มีเวลา' },
+      { keys: ['โดดเดี่ยว','ครอบครัว','ลูก','คนอื่น','ไม่เข้าใจ'], reply: 'บางทีหนูคิดว่า... ถ้าหนูไม่อยู่แล้ว ทุกคนก็คงจะสบายขึ้นนะคะ... คุณหมอคิดว่าหนูคิดผิดไหมคะ?' },
+      { keys: ['ไม่คิดผิด','รู้สึก','ห่วง','สำคัญ','มีคุณค่า','ถาม'], reply: 'คุณหมอถามเรื่องอยากทำร้ายตัวเองไหม... หนูไม่ได้คิดแบบนั้นนะคะ แค่รู้สึกว่ามันไม่มีความหวัง' },
+      { keys: ['ความหวัง','อนาคต','สิ่งดี','เหตุผล','มีชีวิต'], reply: 'ลูกสาวหนูนะคะ... หนูอยากเห็นเขาแต่งงานค่ะ นั่นแหละที่ทำให้หนูยังอยู่ต่อได้' },
+      { keys: ['ลูกสาว','ครอบครัว','เหตุผล','สู้','เพื่อ'], reply: 'ขอบคุณมากนะคะคุณหมอ... หนูรู้สึกดีขึ้นหน่อยเลยค่ะ หนูขอนัดคุยอีกครั้งได้ไหมคะ?' },
+    ],
+    defaultReply: 'หนูเหนื่อยมากเลยค่ะ... ไม่รู้จะอธิบายยังไงดี',
+  },
+};
+
+let currentScenario = null;
+let sessionTurns = 0;
+let sessionXP = 0;
+let responseIndex = 0;
+let usedResponses = new Set();
+
+function getTime() {
+  return new Date().toLocaleTimeString('th-TH', { hour: '2-digit', minute: '2-digit' });
+}
+
+function addMsg(text, role) {
+  const chat = document.getElementById('simChat');
+  const s = currentScenario;
+  const div = document.createElement('div');
+  div.className = `sim-msg ${role}`;
+  div.innerHTML = `
+    <div class="sim-avatar">${role === 'patient' ? s.emoji : `<img src="assets/avatar.png" alt="" onerror="this.outerHTML='👤'">`}</div>
+    <div>
+      <div class="sim-bubble">${text.replace(/\n/g,'<br>')}</div>
+      <div class="sim-time">${getTime()}</div>
+    </div>`;
+  chat.appendChild(div);
+  chat.scrollTop = chat.scrollHeight;
+}
+
+function showTyping() {
+  const chat = document.getElementById('simChat');
+  const s = currentScenario;
+  const div = document.createElement('div');
+  div.className = 'sim-msg patient'; div.id = 'typingDot';
+  div.innerHTML = `<div class="sim-avatar">${s.emoji}</div><div><div class="sim-bubble"><div class="typing-indicator"><div class="typing-dot"></div><div class="typing-dot"></div><div class="typing-dot"></div></div></div></div>`;
+  chat.appendChild(div);
+  chat.scrollTop = chat.scrollHeight;
+}
+
+function getPatientReply(input) {
+  const lower = input.toLowerCase();
+  const s = currentScenario;
+  for (const r of s.responses) {
+    if (!usedResponses.has(r.reply) && r.keys.some(k => lower.includes(k))) {
+      usedResponses.add(r.reply);
+      return r.reply;
+    }
+  }
+  const unused = s.responses.filter(r => !usedResponses.has(r.reply));
+  if (unused.length > 0) {
+    const r = unused[Math.floor(Math.random() * unused.length)];
+    usedResponses.add(r.reply);
+    return r.reply;
+  }
+  return s.defaultReply;
+}
+
+function awardXP(amount) {
+  sessionXP += amount;
+  document.getElementById('simXP').textContent = `⭐ ${sessionXP} XP`;
+  document.getElementById('xpBadge').textContent = `⭐ ${sessionXP} XP`;
+}
+
+function simSend() {
+  const input = document.getElementById('simInput');
+  const text = input.value.trim();
+  if (!text) return;
+  addMsg(text, 'user');
+  input.value = ''; input.style.height = 'auto';
+  sessionTurns++;
+
+  // Award XP per message
+  const xpGain = text.length > 30 ? 15 : 8;
+  awardXP(xpGain);
+
+  showTyping();
+  setTimeout(() => {
+    document.getElementById('typingDot')?.remove();
+    const reply = getPatientReply(text);
+    addMsg(reply, 'patient');
+  }, 1000 + Math.random() * 800);
+}
+
+function startScenario(id) {
+  currentScenario = scenarios[id];
+  sessionTurns = 0; sessionXP = 0; responseIndex = 0;
+  usedResponses = new Set();
+  const s = currentScenario;
+
+  // Setup header
+  document.getElementById('simAvatar').textContent = s.emoji;
+  document.getElementById('simPatientName').textContent = s.name;
+  document.getElementById('simXP').textContent = '⭐ 0 XP';
+  document.getElementById('simCaseTag').innerHTML = `<span class="case-tag ${s.caseColor}" style="margin:0">${s.caseTag}</span>`;
+
+  // Sidebar
+  document.getElementById('ctxName').textContent = s.name;
+  document.getElementById('ctxCase').textContent = s.case;
+  document.getElementById('ctxGoal').textContent = s.goal;
+  document.getElementById('ctxBg').textContent = s.bg;
+  document.getElementById('ctxSkills').innerHTML = s.skills.map(sk => `<div class="skill-focus-item">• ${sk}</div>`).join('');
+  document.getElementById('ctxHints').innerHTML = s.hints.map(h => `<div class="hint-item"><span class="fp-icon">💡</span>${h}</div>`).join('');
+
+  // Clear chat
+  document.getElementById('simChat').innerHTML = '';
+
+  // Show sim page
+  document.getElementById('scenarioSelect').style.display = 'none';
+  document.getElementById('simPage').classList.add('active');
+
+  // Opener message
+  setTimeout(() => { addMsg(s.opener, 'patient'); }, 400);
+}
+
+function backToSelect() {
+  document.getElementById('simPage').classList.remove('active');
+  document.getElementById('scenarioSelect').style.display = '';
+}
+
+function endSession() {
+  const s = currentScenario;
+  const totalXP = sessionXP + 50;
+  const score = Math.min(100, 55 + sessionTurns * 5 + Math.floor(Math.random() * 20));
+
+  document.getElementById('fbPatientName').textContent = `${s.name} — ${s.case}`;
+  document.getElementById('fbScore').textContent = score;
+  document.getElementById('fbTurns').textContent = sessionTurns;
+  document.getElementById('fbXP').textContent = `+${totalXP}`;
+  awardXP(50);
+
+  const skillScores = s.skills.map(sk => ({ name: sk, score: Math.min(100, 50 + Math.floor(Math.random() * 45)) }));
+  document.getElementById('fbSkillBars').innerHTML = skillScores.map(sk => `
+    <div class="skill-score-bar">
+      <div class="label"><span>${sk.name}</span><span>${sk.score}%</span></div>
+      <div class="bar-track"><div class="bar-fill" style="width:${sk.score}%"></div></div>
+    </div>`).join('');
+
+  const strengths = ['รับฟังผู้ป่วยก่อนให้ข้อมูล', 'ใช้ภาษาที่เข้าใจง่าย ไม่ซับซ้อน', 'ตอบสนองต่อความกังวลอย่างเหมาะสม'];
+  const improve  = ['ควรสอบถามความเข้าใจผู้ป่วยมากกว่านี้', 'สามารถเพิ่ม Non-verbal cue ในการแสดงความเห็นอกเห็นใจ'];
+  document.getElementById('fbStrengths').innerHTML = strengths.map(t => `<div class="feedback-point"><span class="fp-icon">✅</span><span>${t}</span></div>`).join('');
+  document.getElementById('fbImprove').innerHTML = improve.map(t => `<div class="feedback-point"><span class="fp-icon">🔧</span><span>${t}</span></div>`).join('');
+
+  document.getElementById('feedbackModal').classList.add('open');
+}
+
+function closeFeedback() {
+  document.getElementById('feedbackModal').classList.remove('open');
+  backToSelect();
+}
+
+// Input events
+document.addEventListener('DOMContentLoaded', () => {
+  const inp = document.getElementById('simInput');
+  inp.addEventListener('keydown', e => { if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); simSend(); } });
+  inp.addEventListener('input', () => { inp.style.height = 'auto'; inp.style.height = Math.min(inp.scrollHeight, 120) + 'px'; });
+});
+
+window.startScenario = startScenario;
+window.simSend = simSend;
+window.endSession = endSession;
+window.closeFeedback = closeFeedback;
+window.backToSelect = backToSelect;
+</script>
+</body>
+</html>
