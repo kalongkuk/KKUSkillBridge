@@ -1,0 +1,412 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Community — KKU SkillBridge</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Sarabun:wght@400;600;700;800;900&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+
+<nav class="navbar">
+  <a href="index.html" class="navbar-brand">
+    <img src="assets/KKU-logo.png" alt="KKU" class="logo-img" onerror="this.outerHTML='<div class=\'logo-icon\'>🌿</div>'" />
+    KKU <span class="accent">Skill</span>Bridge
+  </a>
+  <div class="hamburger"><span></span><span></span><span></span></div>
+  <ul class="nav-links">
+    <li><a href="index.html">Home</a></li>
+    <li><a href="courses.html">Courses</a></li>
+    <li><a href="chatbot.html">AI Chatbot</a></li>
+    <li><a href="community.html" class="active">Community</a></li>
+    <li><a href="others.html">Others</a></li>
+  </ul>
+  <div class="nav-right" style="display:flex;align-items:center;gap:0.75rem">
+    <div style="background:var(--green-pale);color:var(--green);padding:0.3rem 0.85rem;border-radius:100px;font-size:0.82rem;font-weight:700">⭐ 1,240 XP</div>
+    <div style="position:relative">
+      <button class="btn-profile" id="profileBtn">
+        <img src="assets/avatar.png" alt="Profile" onerror="this.outerHTML='👤'" />
+      </button>
+      <div class="dropdown-menu" id="dropdownMenu">
+        <a href="profile.html">👤 &nbsp;ข้อมูลบัญชี</a>
+        <a href="profile.html#courses">📚 &nbsp;คอร์สของฉัน</a>
+        <a href="profile.html#roadmap">🗺 &nbsp;Roadmap ของฉัน</a>
+        <div class="divider"></div>
+        <a href="others.html">❓ &nbsp;Help Center</a>
+      </div>
+    </div>
+  </div>
+</nav>
+
+<!-- Hero -->
+<div class="comm-page-hero">
+  <h1>🏥 Interprofessional Collaboration Hub</h1>
+  <p>พื้นที่แลกเปลี่ยนความรู้และประสบการณ์ระหว่างนักศึกษาสายสุขภาพทุกคณะของ มข.</p>
+  <div class="comm-stats">
+    <div class="comm-stat"><div class="num">1,240</div><div class="lbl">สมาชิก</div></div>
+    <div class="comm-stat"><div class="num">342</div><div class="lbl">กระทู้</div></div>
+    <div class="comm-stat"><div class="num">4</div><div class="lbl">คณะ</div></div>
+    <div class="comm-stat"><div class="num">89</div><div class="lbl">กิจกรรมในเดือนนี้</div></div>
+  </div>
+</div>
+
+<div class="community-layout">
+
+  <!-- Left Sidebar -->
+  <aside class="comm-sidebar">
+    <!-- XP Card -->
+    <div class="xp-card">
+      <div class="xp-num">1,240</div>
+      <div class="xp-label">XP Points ของคุณ</div>
+      <div class="xp-progress"><div class="xp-progress-fill" style="width:62%"></div></div>
+      <div class="xp-next">อีก 760 XP → Level 5</div>
+    </div>
+
+    <!-- Faculty Filter -->
+    <div class="comm-sidebar-card">
+      <h4>คณะ / สาขา</h4>
+      <button class="faculty-btn active" data-faculty="all">
+        <div class="faculty-dot" style="background:#6b7280"></div>
+        <span>ทั้งหมด</span>
+        <small>342</small>
+      </button>
+      <button class="faculty-btn" data-faculty="medicine">
+        <div class="faculty-dot" style="background:#ef4444"></div>
+        <span>แพทยศาสตร์</span>
+        <small>98</small>
+      </button>
+      <button class="faculty-btn" data-faculty="nursing">
+        <div class="faculty-dot" style="background:#3b82f6"></div>
+        <span>พยาบาลศาสตร์</span>
+        <small>124</small>
+      </button>
+      <button class="faculty-btn" data-faculty="pharmacy">
+        <div class="faculty-dot" style="background:#f59e0b"></div>
+        <span>เภสัชศาสตร์</span>
+        <small>76</small>
+      </button>
+      <button class="faculty-btn" data-faculty="health">
+        <div class="faculty-dot" style="background:var(--green)"></div>
+        <span>วิทยาศาสตร์สุขภาพ</span>
+        <small>44</small>
+      </button>
+    </div>
+
+    <!-- Tags -->
+    <div class="comm-sidebar-card" style="padding:1rem">
+      <h4 style="padding:0 0 0.5rem">แท็กยอดนิยม</h4>
+      <div style="display:flex;flex-wrap:wrap;gap:0.4rem;padding:0 0.25rem 0.5rem">
+        <span class="hashtag">#Communication</span>
+        <span class="hashtag">#Teamwork</span>
+        <span class="hashtag">#Empathy</span>
+        <span class="hashtag">#ER</span>
+        <span class="hashtag">#Safety</span>
+        <span class="hashtag">#Handover</span>
+        <span class="hashtag">#Leadership</span>
+        <span class="hashtag">#IPE</span>
+      </div>
+    </div>
+  </aside>
+
+  <!-- Main Feed -->
+  <main>
+    <!-- Toolbar -->
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:1.25rem;flex-wrap:wrap;gap:0.75rem">
+      <div style="display:flex;gap:0.5rem">
+        <button class="filter-chip active" data-sort="latest">ล่าสุด</button>
+        <button class="filter-chip" data-sort="popular">ยอดนิยม</button>
+        <button class="filter-chip" data-sort="unanswered">ยังไม่มีคำตอบ</button>
+      </div>
+      <button class="new-discussion-btn" style="width:auto" onclick="openNewDisc()">
+        + สร้างกระทู้ใหม่
+      </button>
+    </div>
+
+    <!-- Pinned -->
+    <div style="background:var(--blue-light);border:1.5px solid var(--blue);border-radius:var(--radius);padding:1rem 1.25rem;margin-bottom:1.25rem;display:flex;gap:0.75rem;align-items:flex-start">
+      <span style="font-size:1.25rem;flex-shrink:0">📌</span>
+      <div>
+        <p style="font-size:0.82rem;color:#1a86aa;font-weight:700;margin-bottom:0.2rem">ประกาศจากทีมงาน</p>
+        <p style="font-size:0.9rem;font-weight:700">ยินดีต้อนรับสู่ KKU SkillBridge Community! 🎉 แนะนำตัวและแบ่งปันเป้าหมายการเรียนรู้ของคุณได้เลย</p>
+      </div>
+    </div>
+
+    <!-- Discussions -->
+    <div class="discussions-feed" id="discussionsFeed">
+
+      <div class="discussion-card" data-faculty="medicine">
+        <div class="discussion-meta">
+          <span class="faculty-tag tag-medicine">🏥 แพทยศาสตร์</span>
+          <span style="font-size:0.78rem;color:var(--grey-text)">12 นาทีที่แล้ว</span>
+        </div>
+        <h3>วิธีสื่อสารกับผู้ป่วยที่ปฏิเสธการรักษาโดยไม่มีเหตุผล ควรทำอย่างไร?</h3>
+        <p class="author">โดย นศพ.ธนพล ศรีสุข · ปี 4 คณะแพทยศาสตร์</p>
+        <div class="hashtags">
+          <span class="hashtag">#Communication</span>
+          <span class="hashtag">#Empathy</span>
+          <span class="hashtag">#ER</span>
+        </div>
+        <div class="discussion-footer">
+          <span>💬 24 ตอบกลับ</span>
+          <span>👁 156 ดู</span>
+          <span>❤️ 18 ถูกใจ</span>
+          <span style="margin-left:auto;color:var(--green);font-weight:600;font-size:0.78rem">+15 XP</span>
+        </div>
+      </div>
+
+      <div class="discussion-card" data-faculty="nursing">
+        <div class="discussion-meta">
+          <span class="faculty-tag tag-nursing">💉 พยาบาลศาสตร์</span>
+          <span style="font-size:0.78rem;color:var(--grey-text)">1 ชั่วโมงที่แล้ว</span>
+        </div>
+        <h3>ประสบการณ์ Handover ช่วง Night Shift — มีวิธีไหนที่ลดความผิดพลาดได้บ้าง?</h3>
+        <p class="author">โดย นศพย.สุภาวดี แก้วมะณี · ปี 3 คณะพยาบาลศาสตร์</p>
+        <div class="hashtags">
+          <span class="hashtag">#Handover</span>
+          <span class="hashtag">#Safety</span>
+          <span class="hashtag">#Teamwork</span>
+        </div>
+        <div class="discussion-footer">
+          <span>💬 31 ตอบกลับ</span>
+          <span>👁 203 ดู</span>
+          <span>❤️ 42 ถูกใจ</span>
+          <span style="margin-left:auto;color:var(--green);font-weight:600;font-size:0.78rem">+15 XP</span>
+        </div>
+      </div>
+
+      <div class="discussion-card" data-faculty="pharmacy">
+        <div class="discussion-meta">
+          <span class="faculty-tag tag-pharmacy">💊 เภสัชศาสตร์</span>
+          <span style="font-size:0.78rem;color:var(--grey-text)">3 ชั่วโมงที่แล้ว</span>
+        </div>
+        <h3>ทักษะ Counseling ยาสำหรับผู้ป่วยสูงอายุที่ได้ยาหลายตัว — ประสบการณ์ใครบ้างที่มีวิธีดีๆ?</h3>
+        <p class="author">โดย นศภ.ปณิดา วงศ์ชัย · ปี 5 คณะเภสัชศาสตร์</p>
+        <div class="hashtags">
+          <span class="hashtag">#Communication</span>
+          <span class="hashtag">#Pharmacy</span>
+          <span class="hashtag">#Elderly</span>
+        </div>
+        <div class="discussion-footer">
+          <span>💬 17 ตอบกลับ</span>
+          <span>👁 89 ดู</span>
+          <span>❤️ 28 ถูกใจ</span>
+          <span style="margin-left:auto;color:var(--green);font-weight:600;font-size:0.78rem">+15 XP</span>
+        </div>
+      </div>
+
+      <div class="discussion-card" data-faculty="health">
+        <div class="discussion-meta">
+          <span class="faculty-tag tag-health">🌿 วิทยาศาสตร์สุขภาพ</span>
+          <span style="font-size:0.78rem;color:var(--grey-text)">5 ชั่วโมงที่แล้ว</span>
+        </div>
+        <h3>Role Play การสื่อสารระหว่างทีมสหวิชาชีพ — อยากชวนทุกคนมาแบ่งปัน Script ที่ใช้ได้จริง</h3>
+        <p class="author">โดย นส.กมลชนก ใจดี · ปี 3 สาขากายภาพบำบัด</p>
+        <div class="hashtags">
+          <span class="hashtag">#IPE</span>
+          <span class="hashtag">#RolePlay</span>
+          <span class="hashtag">#Leadership</span>
+        </div>
+        <div class="discussion-footer">
+          <span>💬 8 ตอบกลับ</span>
+          <span>👁 67 ดู</span>
+          <span>❤️ 11 ถูกใจ</span>
+          <span style="margin-left:auto;color:var(--green);font-weight:600;font-size:0.78rem">+15 XP</span>
+        </div>
+      </div>
+
+      <div class="discussion-card" data-faculty="medicine">
+        <div class="discussion-meta">
+          <span class="faculty-tag tag-medicine">🏥 แพทยศาสตร์</span>
+          <span style="font-size:0.78rem;color:var(--grey-text)">เมื่อวาน</span>
+        </div>
+        <h3>ความเครียดช่วง Clerkship — ทุกคนรับมืออย่างไร? แบ่งปัน Tips กันได้เลย</h3>
+        <p class="author">โดย นศพ.อารีรัตน์ สุขใจ · ปี 5 คณะแพทยศาสตร์</p>
+        <div class="hashtags">
+          <span class="hashtag">#StressManagement</span>
+          <span class="hashtag">#Burnout</span>
+          <span class="hashtag">#Mindfulness</span>
+        </div>
+        <div class="discussion-footer">
+          <span>💬 45 ตอบกลับ</span>
+          <span>👁 312 ดู</span>
+          <span>❤️ 67 ถูกใจ</span>
+          <span style="margin-left:auto;color:var(--green);font-weight:600;font-size:0.78rem">+15 XP</span>
+        </div>
+      </div>
+
+      <div class="discussion-card" data-faculty="nursing">
+        <div class="discussion-meta">
+          <span class="faculty-tag tag-nursing">💉 พยาบาลศาสตร์</span>
+          <span style="font-size:0.78rem;color:var(--grey-text)">เมื่อวาน</span>
+        </div>
+        <h3>Empathy ในวอร์ดผู้ป่วยระยะสุดท้าย — เส้นแบ่งระหว่างความเป็นมืออาชีพและมนุษย์คืออะไร?</h3>
+        <p class="author">โดย นศพย.วรรณิดา พลอยงาม · ปี 4 คณะพยาบาลศาสตร์</p>
+        <div class="hashtags">
+          <span class="hashtag">#Empathy</span>
+          <span class="hashtag">#Palliative</span>
+          <span class="hashtag">#MentalHealth</span>
+        </div>
+        <div class="discussion-footer">
+          <span>💬 38 ตอบกลับ</span>
+          <span>👁 278 ดู</span>
+          <span>❤️ 54 ถูกใจ</span>
+          <span style="margin-left:auto;color:var(--green);font-weight:600;font-size:0.78rem">+15 XP</span>
+        </div>
+      </div>
+
+    </div>
+
+    <div style="text-align:center;margin-top:1.5rem">
+      <button class="btn" style="background:var(--grey-bg);color:var(--dark)" onclick="loadMore()">โหลดกระทู้เพิ่มเติม</button>
+    </div>
+  </main>
+
+  <!-- Right Sidebar -->
+  <aside class="comm-right">
+    <!-- Workshop -->
+    <div class="workshop-banner">
+      <h4>🎯 Workshop เร็วๆ นี้</h4>
+      <p>Communication Skills Lab<br/>8 พ.ค. 2569 · 09:00–12:00</p>
+      <a href="others.html" style="display:inline-block;background:white;color:var(--orange);padding:0.5rem 1.1rem;border-radius:100px;font-size:0.82rem;font-weight:700">สมัครเลย →</a>
+    </div>
+
+    <!-- Leaderboard -->
+    <div class="comm-sidebar-card">
+      <h4>🏆 Leaderboard ประจำเดือน</h4>
+      <div class="leaderboard-list" style="padding:0.5rem 0.75rem 0.75rem">
+        <div class="lb-item">
+          <div class="lb-rank" style="color:#f59e0b">🥇</div>
+          <div class="lb-avatar">
+            <img src="assets/avatar.png" alt="" onerror="this.outerHTML='👩'" />
+          </div>
+          <div class="lb-name">สุภาวดี แก้วมะณี</div>
+          <div class="lb-xp">2,840 XP</div>
+        </div>
+        <div class="lb-item">
+          <div class="lb-rank" style="color:#9ca3af">🥈</div>
+          <div class="lb-avatar">👨</div>
+          <div class="lb-name">ธนพล ศรีสุข</div>
+          <div class="lb-xp">2,510 XP</div>
+        </div>
+        <div class="lb-item">
+          <div class="lb-rank" style="color:#92400e">🥉</div>
+          <div class="lb-avatar">👩</div>
+          <div class="lb-name">ปณิดา วงศ์ชัย</div>
+          <div class="lb-xp">2,280 XP</div>
+        </div>
+        <div class="lb-item">
+          <div class="lb-rank" style="color:var(--grey-text)">4</div>
+          <div class="lb-avatar">👨</div>
+          <div class="lb-name">กิตติพงษ์ สมบูรณ์</div>
+          <div class="lb-xp">1,960 XP</div>
+        </div>
+        <div class="lb-item" style="background:var(--green-pale);border-radius:10px">
+          <div class="lb-rank" style="color:var(--green)">8</div>
+          <div class="lb-avatar">
+            <img src="assets/avatar.png" alt="" onerror="this.outerHTML='😊'" />
+          </div>
+          <div class="lb-name" style="color:var(--green);font-weight:700">คุณ (ฉัน)</div>
+          <div class="lb-xp">1,240 XP</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Active Members -->
+    <div class="comm-sidebar-card" style="padding:1rem 1.25rem">
+      <h4 style="padding:0 0 0.75rem">👥 สมาชิกออนไลน์ (23)</h4>
+      <div style="display:flex;flex-wrap:wrap;gap:0.4rem">
+        <div style="width:32px;height:32px;border-radius:50%;background:var(--green-pale);display:flex;align-items:center;justify-content:center;font-size:1rem">👩</div>
+        <div style="width:32px;height:32px;border-radius:50%;background:var(--blue-light);display:flex;align-items:center;justify-content:center;font-size:1rem">👨</div>
+        <div style="width:32px;height:32px;border-radius:50%;background:var(--orange-light);display:flex;align-items:center;justify-content:center;font-size:1rem">👩</div>
+        <div style="width:32px;height:32px;border-radius:50%;background:var(--green-pale);display:flex;align-items:center;justify-content:center;font-size:1rem">👨</div>
+        <div style="width:32px;height:32px;border-radius:50%;background:var(--blue-light);display:flex;align-items:center;justify-content:center;font-size:1rem">👩</div>
+        <div style="width:32px;height:32px;border-radius:50%;background:var(--orange-light);display:flex;align-items:center;justify-content:center;font-size:1rem">👨</div>
+        <div style="width:32px;height:32px;border-radius:50%;background:#e5ede9;display:flex;align-items:center;justify-content:center;font-size:0.72rem;font-weight:700;color:var(--grey-text)">+17</div>
+      </div>
+    </div>
+  </aside>
+</div>
+
+<!-- New Discussion Modal -->
+<div class="modal-new-disc" id="newDiscModal">
+  <div class="modal" style="max-width:560px">
+    <button class="modal-close" onclick="closeNewDisc()">✕</button>
+    <h2 style="margin-bottom:0.3rem">✏️ สร้างกระทู้ใหม่</h2>
+    <p style="font-size:0.88rem;color:var(--grey-text);margin-bottom:1.25rem">แบ่งปันความรู้และประสบการณ์กับเพื่อนๆ ทุกคณะ</p>
+    <div class="disc-form">
+      <select>
+        <option>เลือกคณะ / สาขา...</option>
+        <option>🏥 แพทยศาสตร์</option>
+        <option>💉 พยาบาลศาสตร์</option>
+        <option>💊 เภสัชศาสตร์</option>
+        <option>🌿 วิทยาศาสตร์สุขภาพ</option>
+      </select>
+      <input type="text" placeholder="หัวข้อกระทู้..." style="width:100%;padding:0.7rem 1rem;border:2px solid #e5ede9;border-radius:10px;font-family:inherit;font-size:0.92rem;outline:none;margin-bottom:0.85rem;transition:var(--transition)" onfocus="this.style.borderColor='var(--green)'" onblur="this.style.borderColor='#e5ede9'" />
+      <textarea placeholder="เนื้อหากระทู้... แบ่งปันประสบการณ์ ถามคำถาม หรือเชิญชวนแสดงความคิดเห็น"></textarea>
+      <input type="text" placeholder="แท็ก เช่น #Communication #Teamwork" style="width:100%;padding:0.7rem 1rem;border:2px solid #e5ede9;border-radius:10px;font-family:inherit;font-size:0.92rem;outline:none;margin:0.85rem 0;transition:var(--transition)" onfocus="this.style.borderColor='var(--green)'" onblur="this.style.borderColor='#e5ede9'" />
+      <div style="display:flex;gap:0.75rem;justify-content:flex-end">
+        <button class="btn" style="background:var(--grey-bg);color:var(--dark)" onclick="closeNewDisc()">ยกเลิก</button>
+        <button class="btn btn-green" onclick="submitDisc()">โพสต์กระทู้ (+15 XP)</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<footer>
+  <div class="footer-grid">
+    <div class="footer-brand">
+      <h2>🌿 KKU SkillBridge</h2>
+      <p>แพลตฟอร์มพัฒนา Soft Skills สำหรับนักศึกษาสายสุขภาพ<br/>คณะวิทยาศาสตร์สุขภาพ มหาวิทยาลัยขอนแก่น</p>
+    </div>
+    <div class="footer-col"><h4>เมนูหลัก</h4><a href="index.html">Home</a><a href="courses.html">Courses</a><a href="chatbot.html">AI Chatbot</a><a href="community.html">Community</a><a href="others.html">Others</a></div>
+    <div class="footer-col"><h4>Soft Skills</h4><a href="courses.html">Communication</a><a href="courses.html">Teamwork</a><a href="courses.html">Leadership</a><a href="courses.html">Empathy</a></div>
+    <div class="footer-col"><h4>ช่วยเหลือ</h4><a href="others.html">Help Center</a><a href="profile.html">โปรไฟล์</a></div>
+  </div>
+  <div class="footer-bottom">© 2569 KKU SkillBridge — คณะวิทยาศาสตร์สุขภาพ มหาวิทยาลัยขอนแก่น</div>
+</footer>
+
+<script src="js/main.js"></script>
+<script>
+function openNewDisc() { document.getElementById('newDiscModal').classList.add('open'); }
+function closeNewDisc() { document.getElementById('newDiscModal').classList.remove('open'); }
+function submitDisc() {
+  closeNewDisc();
+  alert('โพสต์กระทู้สำเร็จ! +15 XP 🎉');
+}
+function loadMore() {
+  const feed = document.getElementById('discussionsFeed');
+  const extra = `<div class="discussion-card" data-faculty="health">
+    <div class="discussion-meta"><span class="faculty-tag tag-health">🌿 วิทยาศาสตร์สุขภาพ</span><span style="font-size:0.78rem;color:var(--grey-text)">2 วันที่แล้ว</span></div>
+    <h3>Interprofessional Education (IPE) ในชีวิตจริงคืออะไร? ประสบการณ์ใครบ้างที่น่าสนใจ</h3>
+    <p class="author">โดย นส.มณีรัตน์ ดวงดี · ปี 2 สาขาเทคนิคการแพทย์</p>
+    <div class="hashtags"><span class="hashtag">#IPE</span><span class="hashtag">#Teamwork</span></div>
+    <div class="discussion-footer"><span>💬 12 ตอบกลับ</span><span>👁 88 ดู</span><span>❤️ 15 ถูกใจ</span><span style="margin-left:auto;color:var(--green);font-weight:600;font-size:0.78rem">+15 XP</span></div>
+  </div>`;
+  feed.insertAdjacentHTML('beforeend', extra);
+  event.target.style.display = 'none';
+}
+
+// Faculty filter
+document.querySelectorAll('.faculty-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('.faculty-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    const f = btn.dataset.faculty;
+    document.querySelectorAll('.discussion-card').forEach(card => {
+      card.style.display = (f === 'all' || card.dataset.faculty === f) ? '' : 'none';
+    });
+  });
+});
+
+// Sort filter
+document.querySelectorAll('[data-sort]').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('[data-sort]').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+  });
+});
+</script>
+</body>
+</html>

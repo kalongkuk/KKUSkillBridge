@@ -12,7 +12,7 @@
 
 <nav class="navbar">
   <a href="index.html" class="navbar-brand">
-    <div class="logo-icon">🌿</div>
+    <img src="assets/KKU-logo.png" alt="KKU" class="logo-img" onerror="this.outerHTML='<div class=\'logo-icon\'>🌿</div>'" />
     KKU <span class="accent">Skill</span>Bridge
   </a>
   <div class="hamburger"><span></span><span></span><span></span></div>
@@ -20,11 +20,14 @@
     <li><a href="index.html">Home</a></li>
     <li><a href="courses.html">Courses</a></li>
     <li><a href="chatbot.html">AI Chatbot</a></li>
+    <li><a href="community.html">Community</a></li>
     <li><a href="others.html" class="active">Others</a></li>
   </ul>
   <div class="nav-right">
     <div style="position:relative">
-      <button class="btn-profile" id="profileBtn">👤</button>
+      <button class="btn-profile" id="profileBtn">
+        <img src="assets/avatar.png" alt="Profile" onerror="this.outerHTML='👤'" />
+      </button>
       <div class="dropdown-menu" id="dropdownMenu">
         <a href="profile.html">👤 &nbsp;ข้อมูลบัญชี</a>
         <a href="profile.html#courses">📚 &nbsp;คอร์สของฉัน</a>

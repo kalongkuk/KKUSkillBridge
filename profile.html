@@ -12,7 +12,7 @@
 
 <nav class="navbar">
   <a href="index.html" class="navbar-brand">
-    <div class="logo-icon">🌿</div>
+    <img src="assets/KKU-logo.png" alt="KKU" class="logo-img" onerror="this.outerHTML='<div class=\'logo-icon\'>🌿</div>'" />
     KKU <span class="accent">Skill</span>Bridge
   </a>
   <div class="hamburger"><span></span><span></span><span></span></div>
@@ -20,11 +20,14 @@
     <li><a href="index.html">Home</a></li>
     <li><a href="courses.html">Courses</a></li>
     <li><a href="chatbot.html">AI Chatbot</a></li>
+    <li><a href="community.html">Community</a></li>
     <li><a href="others.html">Others</a></li>
   </ul>
   <div class="nav-right">
     <div style="position:relative">
-      <button class="btn-profile" id="profileBtn">👤</button>
+      <button class="btn-profile" id="profileBtn">
+        <img src="assets/avatar.png" alt="Profile" onerror="this.outerHTML='👤'" />
+      </button>
       <div class="dropdown-menu" id="dropdownMenu">
         <a href="profile.html">👤 &nbsp;ข้อมูลบัญชี</a>
         <a href="profile.html#courses">📚 &nbsp;คอร์สของฉัน</a>
@@ -42,13 +45,16 @@
   <div>
     <div class="profile-card">
       <div class="profile-card-top">
-        <div class="profile-avatar">👤</div>
+        <div class="profile-avatar">
+          <img src="assets/avatar.png" alt="Profile" onerror="this.outerHTML='👤'" />
+        </div>
         <h2>นักศึกษา KKU</h2>
         <p>คณะวิทยาศาสตร์สุขภาพ</p>
       </div>
       <nav class="profile-nav">
         <a href="#account" class="active">👤 &nbsp;ข้อมูลบัญชี</a>
         <a href="#courses" id="courses">📚 &nbsp;คอร์สของฉัน</a>
+        <a href="#roadmap" id="roadmap">🗺 &nbsp;Personalize Roadmap</a>
         <a href="#analysis" id="analysis">📊 &nbsp;AI Analysis</a>
         <a href="#skill-test">🎯 &nbsp;ผลทดสอบทักษะ</a>
         <a href="others.html#help">❓ &nbsp;Help Center</a>
@@ -172,6 +178,125 @@
           <a href="courses.html" class="btn btn-green" style="padding:0.5rem 1rem;font-size:0.82rem;flex-shrink:0">เรียนต่อ →</a>
         </div>
 
+      </div>
+    </div>
+
+    <!-- Personalize Roadmap -->
+    <div class="profile-section" id="roadmap">
+      <h3>🗺 Personalize Roadmap</h3>
+      <p style="font-size:0.88rem;color:var(--grey-text);margin-bottom:1.5rem">เส้นทางการพัฒนาที่ AI แนะนำเฉพาะสำหรับคุณ อิงจากผลทดสอบและประวัติการเรียน</p>
+
+      <!-- Current Level -->
+      <div style="background:linear-gradient(135deg,var(--green),var(--blue));border-radius:var(--radius);padding:1.25rem;color:white;margin-bottom:1.75rem;display:flex;align-items:center;gap:1.25rem;flex-wrap:wrap">
+        <div style="font-size:2.5rem">🎓</div>
+        <div style="flex:1">
+          <div style="font-size:0.8rem;opacity:0.85;margin-bottom:0.2rem">ระดับปัจจุบัน</div>
+          <div style="font-size:1.2rem;font-weight:800">Level 4 — Healthcare Communicator</div>
+          <div style="font-size:0.85rem;opacity:0.85;margin-top:0.2rem">อีก 760 XP จะขึ้น Level 5 — Empathetic Leader</div>
+        </div>
+        <div style="text-align:center">
+          <div style="font-size:1.8rem;font-weight:900">1,240</div>
+          <div style="font-size:0.78rem;opacity:0.85">XP สะสม</div>
+        </div>
+      </div>
+
+      <!-- Roadmap Track -->
+      <div class="roadmap-track">
+
+        <div class="roadmap-node done">
+          <div class="roadmap-dot">✓</div>
+          <div class="roadmap-card">
+            <h4>ขั้นที่ 1 — วัดระดับทักษะเบื้องต้น</h4>
+            <p>ทำแบบทดสอบ Pre-Test และ Skill Assessment ครั้งแรก</p>
+            <div style="display:flex;align-items:center;gap:0.75rem;margin-top:0.5rem">
+              <span class="roadmap-badge badge-done">✅ เสร็จแล้ว</span>
+              <span style="font-size:0.78rem;color:var(--green)">+100 XP</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="roadmap-node done">
+          <div class="roadmap-dot">✓</div>
+          <div class="roadmap-card">
+            <h4>ขั้นที่ 2 — Communication Foundation</h4>
+            <p>เรียนคอร์ส "การสื่อสารกับผู้ป่วยและครอบครัว" และ "Active Listening"</p>
+            <div style="display:flex;align-items:center;gap:0.75rem;margin-top:0.5rem">
+              <span class="roadmap-badge badge-done">✅ เสร็จแล้ว</span>
+              <span style="font-size:0.78rem;color:var(--green)">+350 XP</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="roadmap-node done">
+          <div class="roadmap-dot">✓</div>
+          <div class="roadmap-card">
+            <h4>ขั้นที่ 3 — Teamwork Basics</h4>
+            <p>เรียนคอร์ส "การทำงานเป็นทีมสหวิชาชีพ" และเข้าร่วม Community ครั้งแรก</p>
+            <div style="display:flex;align-items:center;gap:0.75rem;margin-top:0.5rem">
+              <span class="roadmap-badge badge-done">✅ เสร็จแล้ว</span>
+              <span style="font-size:0.78rem;color:var(--green)">+290 XP</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="roadmap-node current">
+          <div class="roadmap-dot">▶</div>
+          <div class="roadmap-card">
+            <h4>ขั้นที่ 4 — Empathy & Critical Thinking ⟵ คุณอยู่ตรงนี้</h4>
+            <p>เรียนคอร์ส "Empathy in Healthcare" + ฝึก Role Play กับ AI Chatbot 5 ครั้ง</p>
+            <div class="xp-bar-wrap">
+              <div style="display:flex;justify-content:space-between;font-size:0.78rem;color:var(--grey-text);margin-bottom:0.3rem">
+                <span>ความคืบหน้า</span><span>40%</span>
+              </div>
+              <div class="xp-bar-track"><div class="xp-bar-fill" style="width:40%"></div></div>
+            </div>
+            <div style="display:flex;align-items:center;gap:0.75rem;margin-top:0.65rem;flex-wrap:wrap">
+              <span class="roadmap-badge badge-current">🔥 กำลังทำ</span>
+              <span style="font-size:0.78rem;color:var(--grey-text)">เหลืออีก +500 XP</span>
+              <a href="courses.html" class="btn btn-green" style="padding:0.35rem 0.85rem;font-size:0.78rem;margin-left:auto">เรียนต่อ →</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="roadmap-node upcoming">
+          <div class="roadmap-dot" style="color:#ccc">5</div>
+          <div class="roadmap-card">
+            <h4>ขั้นที่ 5 — Leadership Development</h4>
+            <p>เรียนคอร์ส "ภาวะผู้นำสำหรับบุคลากรสายสุขภาพ" + เข้าร่วม Leadership Workshop</p>
+            <div style="display:flex;align-items:center;gap:0.75rem;margin-top:0.5rem">
+              <span class="roadmap-badge badge-upcoming">🔒 ยังไม่ถึง</span>
+              <span style="font-size:0.78rem;color:var(--grey-text)">ต้องการ Level 5</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="roadmap-node upcoming">
+          <div class="roadmap-dot" style="color:#ccc">6</div>
+          <div class="roadmap-card">
+            <h4>ขั้นที่ 6 — Interprofessional Expert</h4>
+            <p>ทำ Post-Test รอบสุดท้าย + เป็น Mentor ใน Community + รับใบประกาศนียบัตรจากคณะ</p>
+            <div style="display:flex;align-items:center;gap:0.75rem;margin-top:0.5rem">
+              <span class="roadmap-badge badge-upcoming">🏆 เป้าหมายสูงสุด</span>
+              <span style="font-size:0.78rem;color:var(--grey-text)">+1,000 XP</span>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- AI Recommendation -->
+      <div style="background:var(--blue-light);border-radius:var(--radius);padding:1.25rem;margin-top:1rem;border-left:4px solid var(--blue)">
+        <h4 style="font-size:0.95rem;font-weight:700;color:#1a86aa;margin-bottom:0.6rem">🤖 AI แนะนำขั้นตอนถัดไป</h4>
+        <ul style="font-size:0.87rem;color:#1a5570;display:flex;flex-direction:column;gap:0.45rem;padding-left:1.25rem;list-style:disc">
+          <li>เรียนคอร์ส <strong>"Empathy in Healthcare"</strong> — ตรงกับจุดที่ต้องพัฒนาที่สุด</li>
+          <li>ฝึก <strong>Role Play</strong> กับ AI Chatbot เพื่อเพิ่มทักษะ Empathy อย่างน้อย 3 ครั้ง</li>
+          <li>เข้าร่วมกระทู้ใน <strong>Community</strong> เพื่อแลกเปลี่ยนประสบการณ์ (+15 XP/ครั้ง)</li>
+        </ul>
+        <div style="display:flex;gap:0.75rem;margin-top:1rem;flex-wrap:wrap">
+          <a href="courses.html" class="btn btn-green" style="font-size:0.85rem;padding:0.55rem 1.1rem">📚 ดูคอร์สแนะนำ</a>
+          <a href="chatbot.html" class="btn" style="background:white;color:#1a86aa;border:1.5px solid var(--blue);font-size:0.85rem;padding:0.55rem 1.1rem">🤖 ฝึกกับ AI</a>
+          <a href="community.html" class="btn" style="background:white;color:var(--green);border:1.5px solid var(--green);font-size:0.85rem;padding:0.55rem 1.1rem">👥 ไป Community</a>
+        </div>
       </div>
     </div>
 
